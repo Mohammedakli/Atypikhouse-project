@@ -4,11 +4,12 @@ import { getPosts } from "../actions/postAction";
 import Card from "./Post/Card";
 import { isEmpty } from "./Utilitaires";
 
-const Thread = () => {
+const ThreadClient = () => {
   const [loadPost, setLoadPost] = useState(true);
   const [count, setCount] = useState(5);
   const dispatch = useDispatch();
   const posts = useSelector((state) => state.postReducer);
+  const userData = useSelector((state) => state.userReducer);
 
   const loadMore = () => {
     if (window.innerHeight + document.documentElement.scrollTop + 1 > document.scrollingElement.scrollHeight) {
@@ -28,17 +29,17 @@ const Thread = () => {
   }, [loadPost, dispatch, count]);
 
   return (
-    <div className="thread-container">
+    <div className="container">
       <ul>
         {!isEmpty(posts[0]) &&
           posts.map((post) => {
-            if( (post.status === "non_reservé") || ( post.status === "refusé")) {
-               return <Card post={post} key={post._id} />;
-            }           
+              if ((post.clientId === userData._id) && (post.status !== "refusé")) {
+                return <Card post={post} key={post._id} />;
+              }
           })}
       </ul>
     </div>
   );
 };
 
-export default Thread;
+export default ThreadClient;

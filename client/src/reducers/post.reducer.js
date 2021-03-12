@@ -6,6 +6,8 @@ import {
   LIKE_POST,
   UNLIKE_POST,
   UPDATE_POST,
+  UPDATE_STATUS,
+  UPDATE_CLIENT,
 } from "../actions/postAction";
 
 const initialState = {};
@@ -43,6 +45,16 @@ export default function postReducer(state = initialState, action) {
           };
         } else return post;
       });
+    case UPDATE_STATUS: 
+      return {
+        ...state,
+      status: state.postReducer,
+      };
+    case UPDATE_CLIENT: 
+      return {
+        ...state,
+      clientId: state.postReducer,
+      };
     case DELETE_POST:
       return state.filter((post) => post._id !== action.payload.postId);
     case EDIT_COMMENT:
@@ -63,6 +75,7 @@ export default function postReducer(state = initialState, action) {
           };
         } else return post;
       });
+
     case DELETE_COMMENT:
       return state.map((post) => {
         if (post._id === action.payload.postId) {

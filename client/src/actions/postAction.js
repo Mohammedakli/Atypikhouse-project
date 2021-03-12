@@ -13,6 +13,8 @@ export const EDIT_COMMENT = "EDIT_COMMENT";
 export const DELETE_COMMENT = "DELETE_COMMENT";
 export const GET_TRENDS = "GET_TRENDS";
 export const GET_POST_ERRORS = "GET_POST_ERRORS";
+export const UPDATE_STATUS = "UPDATE_STATUS";
+export const UPDATE_CLIENT = "UPDATE_CLIENT";
 
 //Affichage post unique
 export const getPost = (id) => {
@@ -112,6 +114,22 @@ export const updatePost = (postId, message) => {
   };
 };
 
+export const updateStatus = (postId, message, status, clientId) => {
+  return (dispatch) => {
+    return axios({
+      method: "put",
+      url: `${process.env.REACT_APP_API_URL}api/post/${postId}`,
+      data: { message, status, clientId },
+    })
+      .then((res) => {
+        dispatch({ type: UPDATE_STATUS, payload: { status, message, clientId, postId } });
+      })
+      .catch((err) => console.log(err));
+  };
+};
+
+
+
 //Suppression post
 export const deletePost = (postId) => {
   return (dispatch) => {
@@ -170,3 +188,4 @@ export const deleteComment = (postId, commentId) => {
       .catch((err) => console.log(err));
   };
 };
+

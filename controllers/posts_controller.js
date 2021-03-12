@@ -71,6 +71,8 @@ module.exports.createPost = async (req, res) => {
     localisation: req.body.localisation,
     codepostal: req.body.codepostal,
     type: req.body.type,
+    status: req.body.status,
+    clientId : req.body.clientId,
     picture: req.file !== null ? "./uploads/posts/" + fileName : "",
     video: req.body.video,
     likers: [],
@@ -87,21 +89,18 @@ module.exports.createPost = async (req, res) => {
   }
 };
 
-//Mise à Jour du post 
+
+
+
+//Mise à Jour Message post
 module.exports.updatePost = (req, res) => {
   if (!ObjectID.isValid(req.params.id))
     return res.status(400).send("ID unknown : " + req.params.id);
 
   const updatedRecord = {
     message: req.body.message,
-    titre: req.body.titre,
-    prix: req.body.prix,
-    superficie: req.body.superficie,
-    localisation: req.dy.localisation,
-    codepostal: req.body.codepostal,
-    type: req.body.type,
-    date_open: req.body.date_open,
-    date_close: req.body.date_close,
+    status: req.body.status,
+    clientId : req.body.clientId,
   };
 
   PostModel.findByIdAndUpdate(
@@ -114,6 +113,8 @@ module.exports.updatePost = (req, res) => {
     }
   );
 };
+
+
 
 // Suppression du Post
 module.exports.deletePost = (req, res) => {

@@ -9,6 +9,16 @@ import Navbar from "../components/Navbar"
 const Bestof = () => {
   const uid = useContext(UidContext);
   const trendList = useSelector((state) => state.bestofReducer);
+  const userData = useSelector((state) => state.userReducer);
+
+  const afficheLeftNav = () =>
+  {
+    if (userData.role === 'client') {
+      return (
+        <LeftNav />
+      )
+    }
+  }
 
   return (
   <>
@@ -16,9 +26,11 @@ const Bestof = () => {
   <div className="container">
     <div className="row">
       <div className="col-1">
-      <LeftNav />
+      {afficheLeftNav()}
       </div>  
       <div className="col-11">
+        <br/>
+        <h1>Nos Best of</h1>
         <ul>
           {!isEmpty(trendList[0]) && trendList.map((post) => <Card post={post} key={post._id} />)}
         </ul>

@@ -18,6 +18,8 @@ const NewPostForm = () => {
   const [localisation, setLocalisation] = useState("");
   const [codepostal, setCodepostal] = useState("");
   const [type, setType] = useState("");
+  const status = 'non_reservé';
+  const clientId = null;
   const [postPicture, setPostPicture] = useState(null);
   const [video, setVideo] = useState("");
   const [file, setFile] = useState([]);
@@ -67,6 +69,8 @@ const NewPostForm = () => {
       data.append('localisation', localisation);
       data.append('codepostal', codepostal);
       data.append('type', type);
+      data.append('status', status);
+      data.append('clientId', clientId);
       if (file) data.append("file", file);
       data.append('video', video);
       await dispatch(addPost(data));

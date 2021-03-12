@@ -9,6 +9,7 @@ import Bestof from '../../pages/Bestof';
 import Favoris from '../../pages/Favoris';
 import Newpost from '../../pages/Newpost';
 import Reservation from '../../pages/Reservation';
+import Post_pro from '../../pages/Post_pro';
 import Chat from '../../pages/Chat';
 import Gestion from '../../pages/pages_admin/Gestion';
 import Gestion_clients from '../../pages/pages_admin/Gestion_clients';
@@ -18,6 +19,7 @@ import User_view from '../../pages/pages_admin/User_view';
 import Gestion_pubs from '../../pages/pages_admin/Gestion_pubs';
 import Ajout_admin from '../../pages/pages_admin/Ajout_admin';
 import ListAdmin from '../../pages/pages_admin/ListAdmin';
+import Mes_reservations from '../../pages/Mes_reservations';
 
 
 const index = () => {
@@ -36,6 +38,8 @@ const index = () => {
         <Route path="/favoris" exact component={Favoris} />
         <Route path="/newpost" exact component={Newpost} />
         <Route path="/reservation/:id" exact component={Reservation} />
+        <Route path="/post_pro/" exact component={Post_pro} />
+        <Route path="/mes_reservations/" exact component={Mes_reservations} />
         <Route path="/Chat/:id" exact component={Chat} />
 
         

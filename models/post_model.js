@@ -34,6 +34,12 @@ const post_schema = new mongoose.Schema(
     type :  {
       type: String,
     },
+    status :  {
+      type: String,
+    },
+    clientId :  {
+      type: String,
+    },
     likers: {
       type: [String],
       required: true,

@@ -23,6 +23,32 @@ const Navbar = () => {
     }
   }
 
+  const afficheMesOffres = () =>
+  {
+    if (userData.role !== 'client') {
+      return (
+        <NavLink exact to="/post_pro">
+          <button style={{color:'#ff9f1a'}}  className="btn-large btn-light">
+            Mes Offres
+          </button>
+        </NavLink>
+      )
+    }
+  }
+
+  const afficheMesResevations = () =>
+  {
+    if (userData.role === 'client') {
+      return (
+        <NavLink to="/mes_reservations">
+          <button style={{color:'#ff9f1a'}}  className="btn-large btn-light">
+            Mes reservations
+          </button>
+      </NavLink>
+      )
+    }
+  }
+
   return (
 
     <nav style={{ backgroundColor: '#ff9f1a' }}>
@@ -36,12 +62,12 @@ const Navbar = () => {
             <>
               <div>
                   {afficheAnnonce()}
+                  {afficheMesResevations()}
               </div>
-              <NavLink exact to="/reservations">
-                <button style={{color:'#ff9f1a'}}  className="btn-large btn-light">
-                  Reservations
-                </button>
-              </NavLink>
+              <div>
+                {afficheMesOffres()}
+              </div>
+              
               <NavLink exact to="/message">
                 <button style={{color:'#ff9f1a'}}  className="btn-large btn-light">
                   Message

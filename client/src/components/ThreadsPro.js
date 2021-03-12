@@ -33,11 +33,9 @@ const ThreadsPro = () => {
       <ul>
         {!isEmpty(posts[0]) &&
           posts.map((post) => {
-            for (let i = 0; i < userData.likes.length; i++) {
-              if (post._id === userData.likes[i]) {
+              if (post.posterId === userData._id) {
                 return <Card post={post} key={post._id} />;
               }
-            }
           })}
       </ul>
     </div>

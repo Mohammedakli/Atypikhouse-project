@@ -21,6 +21,18 @@ const CardAdmin = ({ post }) => {
     const dispatch = useDispatch();
     const uid = useContext(UidContext);
 
+    const status = () => {
+        if (post.status === 'réservé') {
+          return (<span style={{fontSize:'12px', backgroundColor:'#ff9f1a', borderRadius:"4px 8px"}}>Réservé</span>)
+        } else if (post.status === 'attente') {
+          return (<span style={{fontSize:'12px', backgroundColor:'#25fde9', borderRadius:"4px 8px"}}>En attente</span>)
+        } else if (post.status === 'annulé') {
+          return (<span style={{fontSize:'12px', backgroundColor:'#ff9f1a', borderRadius:"4px 8px"}}>Annulé</span>)
+        } else if (post.status === 'non_reservé') {
+          return (<span style={{fontSize:'12px', backgroundColor:'#ff9f1a', borderRadius:"4px 8px"}}>Non reservé</span>)
+        } 
+    }
+
     const updateItem = () => {
         if (textUpdate) {
             dispatch(updatePost(post._id, textUpdate));
@@ -83,13 +95,13 @@ const CardAdmin = ({ post }) => {
                                 <div className="row" >
                                     <div className="col-sm">
                                         {uid ? (
-                                            <a href={`/reservation/${post._id}`}>
+                                            <div>
                                                 {post.picture && (
                                                     <img height="200" src={post.picture} alt="card-pic" className="card-pic" />
                                                 )}
                                                 {post.video && (
                                                     <iframe
-                                                        width="365"
+                                                        width="200"
                                                         height="200"
                                                         src={post.video}
                                                         frameBorder="0"
@@ -98,7 +110,7 @@ const CardAdmin = ({ post }) => {
                                                         title={post._id}
                                                     ></iframe>
                                                 )}
-                                            </a>
+                                            </div>
                                         ) : (
                                             <>
 
@@ -172,7 +184,7 @@ const CardAdmin = ({ post }) => {
                                         )}
                                     </div>
                                     <div className="col-sm">
-                                    <span style={{fontSize:'12px'}}>status :</span>
+                                    <span style={{fontSize:'12px'}}>status : {status()}</span>
                                     </div>
                                     
                                 </div>
