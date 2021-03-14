@@ -23,7 +23,7 @@ const Gestion_clients = (props) => {
 
     return (
         <div >
-            <nav style={{ backgroundColor: 'green' }}>
+            <nav style={{ backgroundColor: 'green' }} width='100%'>
             <NavLink exact to="/gestion">
                 <h3 style={{ color: 'white', fontFamily: 'fantasy', marginLeft: '20px', paddingTop: '20px' }}>AtypikHouse@Dashboard</h3>
             </NavLink>

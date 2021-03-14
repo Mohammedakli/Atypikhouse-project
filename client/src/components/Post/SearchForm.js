@@ -18,24 +18,30 @@ const SearchForm = () => {
     <div>
 
       <div className="row">
-        <div className="col-1"></div>
-        <MDBInput
-          htmlFor="date_arr"
-          label="Date d'arriver"
-          type="date"
-          id="date_arr"
-          onChange={e => setSearcharr(e.target.value)}
-        />
-        <div className="col-1"></div>
-        <MDBInput
-          htmlFor="date_dep"
-          label="Date de depart"
-          type="date"
-          id="date_dep"
-          onChange={e => setSearchdep(e.target.value)}
-        />
-        <i title="Rafraîchir" style={{padding: '20px'}} onClick={refrechSearch} class="fas fa-sync-alt"></i>
-       
+        
+        <div className="col-6">
+        <MDBCard>
+          <MDBInput
+            htmlFor="date_arr"
+            label="Date d'arriver"
+            type="date"
+            id="date_arr"
+            onChange={e => setSearcharr(e.target.value)}
+          />
+        </MDBCard>
+        </div>
+        <div className="col-6">
+        <MDBCard>
+          <MDBInput
+            htmlFor="date_dep"
+            label="Date de depart"
+            type="date"
+            id="date_dep"
+            onChange={e => setSearchdep(e.target.value)}
+          />
+        </MDBCard>
+        <i title="Rafraîchir" onClick={refrechSearch} class="fas fa-sync-alt"></i>
+       </div>
 
       </div>
 
@@ -61,6 +67,7 @@ const SearchForm = () => {
             }
              
           } )}
+          <p>Recherche par date... </p>
       </div>
     </div>
   );

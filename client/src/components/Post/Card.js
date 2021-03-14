@@ -228,11 +228,11 @@ const Card = ({ post }) => {
                       {uid ? (
                         <a href={`/reservation/${post._id}`}>
                           {post.picture && (
-                            <img height="200" width="200" src={post.picture} alt="card-pic" className="card-pic" />
+                            <img height="200" width="100%" src={post.picture} alt="card-pic" className="card-pic" />
                           )}
                           {post.video && (
                             <iframe
-                              width="200"
+                              width="100%"
                               height="200"
                               src={post.video}
                               frameBorder="0"
@@ -246,11 +246,11 @@ const Card = ({ post }) => {
                         <>
 
                             {post.picture && (
-                            <img height="200" src={post.picture} alt="card-pic" className="card-pic" />
+                            <img height="200" width="100%" src={post.picture} alt="card-pic" className="card-pic" />
                           )}
                           {post.video && (
                             <iframe
-                              width="200"
+                              width="100%"
                               height="200"
                               src={post.video}
                               frameBorder="0"

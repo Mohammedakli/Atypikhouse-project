@@ -20,6 +20,8 @@ import Gestion_pubs from '../../pages/pages_admin/Gestion_pubs';
 import Ajout_admin from '../../pages/pages_admin/Ajout_admin';
 import ListAdmin from '../../pages/pages_admin/ListAdmin';
 import Mes_reservations from '../../pages/Mes_reservations';
+import { Accueil } from '../../pages/page_accueil/Accueil';
+import HomePro from '../../pages/HomePro';
 
 
 const index = () => {
@@ -29,7 +31,9 @@ const index = () => {
 
       <Router>
       <Switch>
-        <Route path="/" exact component={Home} />
+        <Route path="/" exact component={Accueil} />
+        <Route path="/Home" exact component={Home} />
+        <Route path="/Homepro" exact component={HomePro} />
         <Route path="/profil" exact component={Profil} />
         <Route path="/profil_pro" exact component={Profil_pro} />
         <Route path="/profil_admin" exact component={Profil_admin} />

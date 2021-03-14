@@ -34,7 +34,7 @@ const SignInForm = () => {
           passwordError.innerHTML = res.data.errors.password;
           roleError.innerHTML = res.data.errors.role;
         } else {
-          window.location = "/";
+          window.location = "/home";
         }
       })
       .catch((err) => {
@@ -49,7 +49,7 @@ const SignInForm = () => {
         <MDBCard >
           <MDBCardBody>
             <form action="" onSubmit={handleLogin} id="sign-up-form">
-              <p className="h4 text-center py-4">Connexion client</p>
+              <p className="h4 text-center py-4">Connexion locataire</p>
               <div className="role error"></div>
               <div className="grey-text">
                 <MDBInput
@@ -83,7 +83,7 @@ const SignInForm = () => {
                 <div className="font-weight-light">
                   <a href="/profil">Forgot Password?</a>
                 </div>
-              </MDBModalFooter>
+            </MDBModalFooter>
           </MDBCardBody>
         </MDBCard>
       </MDBCol>

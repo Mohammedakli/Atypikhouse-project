@@ -1,3 +1,4 @@
+import { MDBBtn } from "mdbreact";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { uploadPicture } from "../../actions/userAction";
@@ -28,7 +29,7 @@ const UpdatePicture = () => {
         onChange={(e) => setFile(e.target.files[0])}
       />
       <br/>
-      <input type="submit" value="Envoyer" />
+      <MDBBtn type="submit">Envoyer</MDBBtn>
     </form>
   );
 };

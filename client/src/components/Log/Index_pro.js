@@ -19,10 +19,10 @@ const Index_pro = ( props ) => {
   };
 
   return (
-      <div className="container">
+      <div className="container" style={{paddingTop:'10px'}}>
         <br/>
         
-          <MDBBtn style={{ backgroundColor: '#ff9f1a', color:'white' }}
+          <MDBBtn style={{ backgroundColor: '#ff7979', color:'white' }}
             onClick={handleModals}
             id="register"
             className={signUpModal ? "active-btn" : null}
@@ -31,7 +31,7 @@ const Index_pro = ( props ) => {
           </MDBBtn>
           <br/>
           <br/>
-          <MDBBtn style={{ backgroundColor: '#ff9f1a', color:'white' }}
+          <MDBBtn style={{ backgroundColor: '#ff7979', color:'white' }}
             onClick={handleModals}
             id="login"
             className={signInModal ? "active-btn" : null}

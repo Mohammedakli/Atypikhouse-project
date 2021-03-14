@@ -75,10 +75,6 @@ const SignInAdminForm = () => {
             </form>
             <MDBModalFooter>
                 <div className="font-weight-light">
-                  <p>Not a member? {" "}
-                      <a href="/profil_pro"  >
-                      Sign up
-                      </a> </p>
                   <a href="/profil_pro">Forgot Password?</a>
                 </div>
               </MDBModalFooter>

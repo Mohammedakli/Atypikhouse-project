@@ -5,8 +5,9 @@ import { useDispatch, useSelector } from "react-redux";
 import StripeCheckout from "react-stripe-checkout"
 import ImageGallery from 'react-image-gallery';
 import { MDBBtn, MDBCard } from 'mdbreact';
-import Navbar from "../components/Navbar";
 import { updateStatus } from "../actions/postAction";
+import NavBar from '../components/PageAccueil/NavBar';
+import Dropdown from '../components/PageAccueil/Dropdown';
 
  
 const Reservation = (props) => {
@@ -98,14 +99,20 @@ const Reservation = (props) => {
   }
 
 
-  const infoPost = () => {}
+  const infoPost = () => {};
 
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggle = () => {
+    setIsOpen(!isOpen);
+  };
  
 
   return (
     <>
     
-    <Navbar />
+    <NavBar toggle={toggle}/>
+    <Dropdown isOpen={isOpen} toggle={toggle}/>
     <div>
     {formSubmit ? (
                         <>

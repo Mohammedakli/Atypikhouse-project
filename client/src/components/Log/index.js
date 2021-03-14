@@ -21,7 +21,7 @@ const Log = ( props ) => {
   return (
       <div className="container">
         <br/>
-        <MDBBtn style={{ backgroundColor: '#ff9f1a', color:'white' }}
+        <MDBBtn style={{ backgroundColor: '#ff7979', color:'white' }}
             onClick={handleModals}
             id="register"
             className={signUpModal ? "active-btn" : null}
@@ -30,7 +30,7 @@ const Log = ( props ) => {
           </MDBBtn>
           <br/>
           <br/>
-          <MDBBtn style={{ backgroundColor: '#ff9f1a', color:'white' }}
+          <MDBBtn style={{ backgroundColor: '#ff7979', color:'white' }}
             onClick={handleModals}
             id="login"
             className={signInModal ? "active-btn" : null}

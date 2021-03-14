@@ -4,7 +4,8 @@ import LeftNav from "../components/LeftNav";
 import SearchForm from "../components/Post/SearchForm";
 import Thread from "../components/Thread";
 import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn, MDBCard, MDBCardBody, MDBModalFooter } from 'mdbreact';
-import Navbar from "../components/Navbar"
+import NavBar from '../components/PageAccueil/NavBar';
+import Dropdown from '../components/PageAccueil/Dropdown';
 
 const Search = () => {
   const uid = useContext(UidContext);
@@ -17,15 +18,21 @@ const Search = () => {
   const onTextChange = input => {
     setState({ ...state, isSearching: input.length > 0 })
     console.log(input)
-  }
+  };
+
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggle = () => {
+    setIsOpen(!isOpen);
+  };
 
   return (
     <>
-    <Navbar />
-    <div className="container">
+    <NavBar toggle={toggle}/>
+    <Dropdown isOpen={isOpen} toggle={toggle}/>
+    <div className="container" style={{paddingTop:'13%'}}>
       <div className="row">
         <div className="col-1">
-          <LeftNav />
         </div>
         <div className="col-11">
 
@@ -36,7 +43,7 @@ const Search = () => {
                 <MDBCard>
                   <MDBCardBody>
                     <form >
-                      <p className="h4 text-center py-4">Veuillez entrer les détails de votre recherche</p>
+                      <p style={{textAlign:'center'}}>Veuillez entrer les détails de votre recherche</p>
                       <div className="grey-text">
                         
                         <br />

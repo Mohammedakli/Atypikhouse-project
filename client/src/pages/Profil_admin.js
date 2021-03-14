@@ -1,19 +1,27 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import Index_admin from "../components/Log/Index_admin";
 import { UidContext } from "../components/UserIdConnect";
 import UpdateInfoProfil from "../components/Profil/UpdateInfoProfil";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "../style/index.css"
-import Navbar from "../components/Navbar"
+import NavBar from '../components/PageAccueil/NavBar';
+import Dropdown from '../components/PageAccueil/Dropdown';
 
 const Profil_admin = () => {
   const uid = useContext(UidContext);
 
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggle = () => {
+    setIsOpen(!isOpen);
+  };
+
   return (
     <>
-    <Navbar />
+    <NavBar toggle={toggle}/>
+    <Dropdown isOpen={isOpen} toggle={toggle}/>
     <div className="container" >
-      <div style={{ backgroundImage: "./img/fond.svg" }} >
+      <div style={{paddingTop:'10%'}} >
         {uid ? (
           <UpdateInfoProfil />
         ) : (
@@ -21,9 +29,6 @@ const Profil_admin = () => {
               <div className="row">
                 <div className="col">
                   <Index_admin signin={true} signup={false} />
-                </div>
-                <div className="col">
-                  <img src="./img/fond.svg" alt="img" />
                 </div>
               </div>
             </div>

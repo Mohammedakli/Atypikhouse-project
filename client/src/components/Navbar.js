@@ -54,7 +54,7 @@ const Navbar = () => {
     <nav style={{ backgroundColor: '#ff9f1a' }}>
       <div className="container">
         <div className="navbar">
-          <NavLink exact to="/">
+          <NavLink exact to="/accueil">
             <h3 style={{ color: 'white', fontFamily: 'fantasy' }}>AtypikHouse</h3>
           </NavLink>
           

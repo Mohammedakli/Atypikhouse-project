@@ -40,6 +40,9 @@ const post_schema = new mongoose.Schema(
     clientId :  {
       type: String,
     },
+    nbr_personne :  {
+      type: Number,
+    },
     likers: {
       type: [String],
       required: true,

@@ -4,9 +4,9 @@ import LeftNav from "../components/LeftNav";
 import Thread from "../components/Thread";
 import Trends from "../components/Trends";
 import SearchForm from "../components/Post/SearchForm";
-import Navbar from "../components/Navbar"
 import { useSelector } from "react-redux";
-
+import NavBar from '../components/PageAccueil/NavBar';
+import Dropdown from '../components/PageAccueil/Dropdown';
 
 const Home = () => {
   const uid = useContext(UidContext);
@@ -23,24 +23,21 @@ const Home = () => {
     console.log(input)
   }
 
-  const afficheLeftNav = () =>
-  {
-    if (userData.role === 'client') {
-      return (
-        <LeftNav />
-      )
-    }
-  }
+
+
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggle = () => {
+    setIsOpen(!isOpen);
+  };
 
   return (
     <>
-    <Navbar />
-    <div className="container">
+    <NavBar toggle={toggle}/>
+    <Dropdown isOpen={isOpen} toggle={toggle}/>
+    <div className="container" style={{paddingTop:'10%'}}>
       <div className="row">
-        <div className="col-1">
-          {afficheLeftNav()}
-        </div>
-        <div className="col-7">
+        <div className="col-8">
           <br/>
           <SearchForm/>
           <hr/>

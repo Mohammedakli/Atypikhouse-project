@@ -23,9 +23,12 @@ const Logout = () => {
   };
 
   return (
+  <a href="/accueil">
     <div onClick={logout} style={{textAlign:'right'}}>
-      <i title="Se déconnecter" class="fas fa-power-off"></i>
+        {"  "}Déconnexion
     </div>
+  </a>
+    
   );
 };
 

@@ -73,6 +73,7 @@ module.exports.createPost = async (req, res) => {
     type: req.body.type,
     status: req.body.status,
     clientId : req.body.clientId,
+    nbr_personne: req.body.nbr_personne,
     picture: req.file !== null ? "./uploads/posts/" + fileName : "",
     video: req.body.video,
     likers: [],

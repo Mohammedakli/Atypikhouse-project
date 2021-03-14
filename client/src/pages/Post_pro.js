@@ -1,8 +1,9 @@
 import React, { useContext, useState } from "react";
 import { UidContext } from "../components/UserIdConnect";
-import Navbar from "../components/Navbar"
 import { useSelector } from "react-redux";
 import ThreadsPro from "../components/ThreadsPro";
+import NavBarPro from "../components/PageAccueil/NavBarPro";
+import DropdownPro from "../components/PageAccueil/DropdownPro";
 
 
 const Post_pro = () => {
@@ -15,15 +16,22 @@ const Post_pro = () => {
     query: ""
   });
 
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggle = () => {
+    setIsOpen(!isOpen);
+  };
+
  
   return (
     <>
-    <Navbar />
+    <NavBarPro toggle={toggle}/>
+    <DropdownPro isOpen={isOpen} toggle={toggle}/>
     <div className="container">
       <div className="row">
         <div className="col-1">
         </div>
-        <div className="col-10">
+        <div className="col-10"  style={{paddingTop:'10%'}}>
           <br/>
           <h1>Mes posts</h1>
           <ThreadsPro />

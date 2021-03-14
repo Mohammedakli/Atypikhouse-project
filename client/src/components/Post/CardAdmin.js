@@ -97,11 +97,11 @@ const CardAdmin = ({ post }) => {
                                         {uid ? (
                                             <div>
                                                 {post.picture && (
-                                                    <img height="200" src={post.picture} alt="card-pic" className="card-pic" />
+                                                    <img height="200" width="100%" src={post.picture} alt="card-pic" className="card-pic" />
                                                 )}
                                                 {post.video && (
                                                     <iframe
-                                                        width="200"
+                                                        width="100%"
                                                         height="200"
                                                         src={post.video}
                                                         frameBorder="0"
@@ -115,11 +115,11 @@ const CardAdmin = ({ post }) => {
                                             <>
 
                                                 {post.picture && (
-                                                    <img height="200" src={post.picture} alt="card-pic" className="card-pic" />
+                                                    <img height="200" width="100%" src={post.picture} alt="card-pic" className="card-pic" />
                                                 )}
                                                 {post.video && (
                                                     <iframe
-                                                        width="365"
+                                                        width="100%"
                                                         height="200"
                                                         src={post.video}
                                                         frameBorder="0"

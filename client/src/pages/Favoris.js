@@ -1,24 +1,31 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { UidContext } from "../components/UserIdConnect";
 import LeftNav from "../components/LeftNav";
 import ThreadsFavoris from "../components/ThreadsFavoris";
-import Navbar from "../components/Navbar"
+import Dropdown from '../components/PageAccueil/Dropdown';
+import NavBar from '../components/PageAccueil/NavBar';
 
 const Favoris = () => {
   const uid = useContext(UidContext);
 
+  const [isOpen, setIsOpen] = useState(false);
+
+    const toggle = () => {
+      setIsOpen(!isOpen);
+    };
+
   return (
     <>
-    <Navbar />
-    <div className="container">
+    <NavBar toggle={toggle}/>
+    <Dropdown isOpen={isOpen} toggle={toggle}/>
+    <div className="container" style={{paddingTop:'10%'}}>
       <div className="container">
         <div className="row">
           <div className="col-1">
-            <LeftNav />
           </div>
           <div className="col-11">
             <br/>
-            <h4>Liste des favoris</h4>
+            <p>Liste de mes favoris</p>
             <div className="main">
               <div className="home-header">
               </div>

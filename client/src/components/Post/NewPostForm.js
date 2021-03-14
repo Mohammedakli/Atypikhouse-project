@@ -18,6 +18,7 @@ const NewPostForm = () => {
   const [localisation, setLocalisation] = useState("");
   const [codepostal, setCodepostal] = useState("");
   const [type, setType] = useState("");
+  const [nbr_personne, setNbr_personne] = useState("");
   const status = 'non_reservé';
   const clientId = null;
   const [postPicture, setPostPicture] = useState(null);
@@ -71,13 +72,14 @@ const NewPostForm = () => {
       data.append('type', type);
       data.append('status', status);
       data.append('clientId', clientId);
+      data.append('nbr_personne', nbr_personne);
       if (file) data.append("file", file);
       data.append('video', video);
       await dispatch(addPost(data));
       dispatch(getPosts());
       cancelPost();
     } else {
-      alert("Veuillez entrer un message")
+      alert("Veuillez entrer une description brève de votre offre")
     }
   };
  
@@ -120,226 +122,176 @@ const NewPostForm = () => {
   }, [userData, message, video]);
 
   return (
-    <div className="container">
+    <>
       {isLoading ? (
         <i className="fas fa-spinner fa-pulse"></i>
       ) : (
         <>
-        <MDBContainer><bcomplexe r />
-            <MDBRow>
-
-              <MDBCol md="12">
-                <MDBCard>
-                  <MDBCardBody>
-          <div className="row">
-            <div className="col-6">
-              <h4 style={{backgroundColor:'#ff9f1a'}}>Déposer votre annonce</h4>
-          <div className="form">
-            <br/>
-            
-            <br/>
-            <div className="row">
-                <div className="col-6">
-                  <label htmlFor="titre">Titre de l'annonce :</label>
-                  <br/>
-                  <input
-                    type="text"
-                    name="titre"
-                    id="titre"
-                    placeholder="Votre titre ?"
-                    onChange={(e) => setTitre(e.target.value)}
-                    value={titre}
-                  />
-                </div>
-                <div className="col-5">
-                  <label htmlFor="type">Type :</label>
-                  <br/>
-                  <MDBInput
-                    type="text"
-                    name="type"
-                    id="type"
-                    placeholder="Quelle Type ?"
-                    onChange={(e) => setType(e.target.value)}
-                    value={type}
-                  />
-                </div>
-            </div>
-            <div className="row">
-                  <div className="col-6">
-                    <label htmlFor="superficie">Superficie (m²) :</label>
-                    <br/>
-                    <input
-                      type="number"
-                      name="superficie"
-                      id="superficie"
-                      placeholder="Quelle est la superficie de l'habitat ?"
-                      onChange={(e) => setSuperficie(e.target.value)}
-                      value={superficie}
-                    />
-                  </div>
-                  <div className="col-5">
-                    <label htmlFor="codepostal">Code postal :</label>
-                    <br/>
-                    <input
-                      type="number"
-                      name="codepostal"
-                      id="codepostal"
-                      placeholder="Code postal ?"
-                      onChange={(e) => setCodepostal(e.target.value)}
-                      value={codepostal}
-                    />
-                  </div>
+        <MDBContainer>
+    <MDBRow>
+      <MDBCol md="12">
+        <MDBCard >
+          <MDBCardBody>
+            <p style={{backgroundColor:'#ff9f1a'}}>Déposer votre annonce</p>
+            <form action="">
+              <div className="grey-text">
+                <MDBInput
+                required
+                  label="titre"
+                  type="text"
+                  name="titre"
+                  id="titre"
+                  onChange={(e) => setTitre(e.target.value)}
+                  value={titre}
+                />
+                 <MDBInput
+                 required
+                  label="type"
+                  type="text"
+                  name="ttype"
+                  id="type"
+                  onChange={(e) => setType(e.target.value)}
+                  value={type}
+                />
+                 <MDBInput
+                  label="superficie"
+                  type="number"
+                  name="superficie"
+                  id="superficie"
+                  onChange={(e) => setSuperficie(e.target.value)}
+                  value={superficie}
+                />
+                <MDBInput
+                required
+                  label="codepostal"
+                  type="number"
+                  name="codepostal"
+                  id="codepostal"
+                  onChange={(e) => setCodepostal(e.target.value)}
+                  value={codepostal}
+                />
+                <MDBInput
+                required
+                  label="localisation"
+                  type="text"
+                  name="localisation"
+                  id="localisation"
+                  onChange={(e) => setLocalisation(e.target.value)}
+                  value={localisation}
+                />
+                <MDBInput
+                required
+                  label="prix"
+                  type="number"
+                  name="prix"
+                  id="prix"
+                  onChange={(e) => setPrix(e.target.value)}
+                  value={prix}
+                />
+                <MDBInput
+                required
+                  label="nombre de personne"
+                  type="number"
+                  name="nbr_personne"
+                  id="nbr_personne"
+                  onChange={(e) => setNbr_personne(e.target.value)}
+                  value={nbr_personne}
+                />
+                <MDBInput
+                required
+                  label="Date début de disponibilité"
+                  type="date"
+                  name="date_open"
+                  id="date_open"
+                  onChange={(e) => setDate_open(e.target.value)}
+                  value={date_open}
+                />
+                <MDBInput
+                required
+                  label="Date fin de disponibilité"
+                  type="date"
+                  name="date_close"
+                  id="date_close"
+                  onChange={(e) => setDate_close(e.target.value)}
+                  value={date_close}
+                />
+                <textarea 
+                  class="form-control rounded-0" 
+                  id="exampleFormControlTextarea2" 
+                  rows="3"
+                  name="message"
+                  id="message"
+                  placeholder="Décrivez votre offre..."
+                  onChange={(e) => setMessage(e.target.value)}
+                  value={message}
+                ></textarea>
               </div>
-            <div className="col-11">
-              <label htmlFor="localisation">Localisation :</label>
-              <br/>
-              <input
-                type="text"
-                name="localisation"
-                id="localisation"
-                placeholder="Localisation ?"
-                onChange={(e) => setLocalisation(e.target.value)}
-                value={localisation}
-              />
-            </div>
-            <div className="row">
-              <div className="col-6">
-              <label htmlFor="prix">Prix (€) :</label>
-              <br/>
-              <input
-                type="number"
-                name="prix"
-                id="prix"
-                placeholder="Coût ?"
-                onChange={(e) => setPrix(e.target.value)}
-                value={prix}
-              />
-            </div>
-            <div className="col-5">
-              <label htmlFor="nbr_personne"> Capacité de reception :</label>
-              <br/>
-              <input
-                type="number"
-                name="nbr_personne"
-                id="nbr_personne"
-                placeholder="Pour combien de personne max?"
-                onChange={(e) => setPrix(e.target.value)}
-                
-              />
-            </div>
-            </div>
-            <div className="row">
-              <div className="11">
-              <label htmlFor="date_open">Date de debut de reception :</label>
-              <br/>
-              <input
-                type="date"
-                name="date_open"
-                id="date_open"
-                onChange={(e) => setDate_open(e.target.value)}
-                value={date_open}
-              />
-              </div>
-              </div>
-              <div className="row">
-              <hr/>{"   "}
-              <div className="11">
-              <label htmlFor="date_close">Date de fin de reception :</label>
-              <br/>
-              <input
-                type="date"
-                name="date_close"
-                id="date_close"
-                onChange={(e) => setDate_close(e.target.value)}
-                value={date_close}
-              />
-              </div>
-            <div>
-              <label htmlFor="message">Décrivez votre bien :</label>
-              <br/>
-              <textarea
-                rows="20" cols="50"
-                name="message"
-                id="message"
-                placeholder="Votre commentaire..."
-                onChange={(e) => setMessage(e.target.value)}
-                value={message}
-              />
-            </div>
-            </div>
-            
-            
-            
-            
-            
-            
-            <div className="footer-form">
-              <div className="icon">
-                {isEmpty(video) && (
-                  <>
-                    <img src="./img/icons/picture.svg" alt="img" />
-                    <input
-                      multiple
-                      type="file"
-                      id="file-upload"
-                      name="file"
-                      accept=".jpg, .jpeg, .png"
-                      onChange={imageHandleChange}
-                    />
-                  </>
-                )}
-                {video && (
-                  <button onClick={() => setVideo("")}>Supprimer video</button>
-                )}
-              </div>
-              {!isEmpty(error.format) && <p>{error.format}</p>}
-              {!isEmpty(error.maxSize) && <p>{error.maxSize}</p>}
-              <div className="btn-send">
-                {message || selectedImages || video.length > 20 ? (
-                  <button className="cancel" onClick={cancelPost}>
-                    Annuler message
-                  </button>
-                ) : null}
-                <button  className="send" onClick={handlePost}>
-                  Envoyer
-                </button>
-              </div>
-            </div>
-          </div>
-          </div>
-          <div className="col-6" style={{borderLeft:"2px solid black", }}>
-            <h4 style={{backgroundColor:'#ff9f1a'}}>Images</h4>
-                {message || selectedImages || video.length > 20 ? (
-              
-              <div className="right">
-                  <div className="content">
-                    <div className="row">
-                      {renderPhotos(selectedImages)}
-                    </div>
-                    
+              <div className="footer-form">
+                  <div className="icon">
+                    {isEmpty(video) && (
+                      <>
+                        <input
+                          multiple
+                          type="file"
+                          id="file-upload"
+                          name="file"
+                          accept=".jpg, .jpeg, .png"
+                          onChange={imageHandleChange}
+                        />
+                      </>
+                    )}
                     {video && (
-                      <iframe
-                         src={video}
-                        frameBorder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen
-                        title={video}
-                      ></iframe>
+                      <MDBBtn onClick={() => setVideo("")}>Supprimer video</MDBBtn>
                     )}
                   </div>
+                  {!isEmpty(error.format) && <p>{error.format}</p>}
+                  {!isEmpty(error.maxSize) && <p>{error.maxSize}</p>}
+                  <div className="btn-send">
+                    {message || selectedImages || video.length > 20 ? (
+                      <MDBBtn className="cancel" onClick={cancelPost}>
+                        Annuler la plublication
+                      </MDBBtn>
+                    ) : null}
+                    <MDBBtn type="submit" onClick={handlePost}>
+                      Envoyer
+                    </MDBBtn>
+                  </div>
               </div>
-            
-            ) : null}
-          </div>
-          </div>
+            </form>
           </MDBCardBody>
-                </MDBCard>
-              </MDBCol>
-            </MDBRow>
-          </MDBContainer>
+        </MDBCard>
+        <MDBCard>
+            <MDBCardBody>
+              <p style={{backgroundColor:'#ff9f1a'}}>Aperçu des images</p>
+                  {message || selectedImages || video.length > 20 ? (
+                
+                <div className="right">
+                    <div className="content">
+                      <div className="row">
+                        {renderPhotos(selectedImages)}
+                      </div>
+                      
+                      {video && (
+                        <iframe
+                          src={video}
+                          frameBorder="0"
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                          allowFullScreen
+                          title={video}
+                        ></iframe>
+                      )}
+                    </div>
+                </div>
+              
+              ) : null}
+            </MDBCardBody>
+          </MDBCard>
+      </MDBCol>
+    </MDBRow>
+  </MDBContainer>
         </>
       )}
-    </div>
+    </>
   );
 };
 

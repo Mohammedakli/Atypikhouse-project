@@ -76,7 +76,7 @@ const SignUpForm = () => {
             <MDBCard>
               <MDBCardBody >
                 <form action="" onSubmit={handleRegister} id="sign-up-form">
-                  <p className="h4 text-center py-4">Enregistrement client</p>
+                  <p className="h4 text-center py-4">Enregistrement locataire</p>
                   <div className="grey-text">
                     <MDBInput
                       htmlFor="pseudo"

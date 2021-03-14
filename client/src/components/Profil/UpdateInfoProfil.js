@@ -11,60 +11,46 @@ const UpdateInfoProfil = () => {
   const error = useSelector((state) => state.errorReducer.userError);
 
   
+    return (
+      <div className="container">
+        <div className="row">
+          <div className="col-1">
+            
+          </div>
+          <br/>
+          <div className="col-11" style={{paddingTop:'10%'}}>
+            <MDBContainer><bcomplexe r />
+              <MDBRow>
 
-  const afficheLeftNav = () =>
-  {
-    if (userData.role === 'client') {
-      return (
-        <LeftNav />
-      )
-    }
-  }
-
-  return (
-    <div className="container">
-      <div className="row">
-        <div className="col-1">
-          {afficheLeftNav()}
-        </div>
-        <br/>
-        <div className="col-11">
-          <MDBContainer><bcomplexe r />
-            <MDBRow>
-
-              <MDBCol md="12">
-                <MDBCard>
-                  <MDBCardBody>
-                    <h1> Profil de {userData.pseudo}</h1>
-                    <h6>Compte créé le : {dateParser(userData.createdAt)}</h6>
-                    <div className="row">
-                    <div className="col-6">
-                      <ul>
-                        <li>Pseudo: {userData.pseudo}</li>
-                        <li>Email: {userData.email}</li>
-                      </ul>
-                    </div>
-                      <div className="col-6">
-                        <div className="left-part">
-                          <h3>Photo de profil</h3>
-                          <img height="400"
-                            src={userData.picture} alt="user-pic" />
-                          <UpdatePicture />
-                          <p>{error.maxSize}</p>
-                          <p>{error.format}</p>
+                <MDBCol md="12">
+                  <MDBCard>
+                    <MDBCardBody>
+                      <h1> Profil de {userData.pseudo}</h1>
+                      <h6>Compte créé le : {dateParser(userData.createdAt)}</h6>
+                      <h6>Pseudo: {userData.pseudo}</h6>
+                      <h6>Email: {userData.email}</h6>
+                      <div className="row">
+                        <div className="col-12">
+                          <div className="left-part">
+                            <img height="30%" width="100%"
+                              style={{borderRadius:'30px', border: '2px solid #ff7979'}}
+                              src={userData.picture} alt="user-pic" />
+                            <UpdatePicture />
+                            <p>{error.maxSize}</p>
+                            <p>{error.format}</p>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </MDBCardBody>
-                </MDBCard>
-              </MDBCol>
-            </MDBRow>
-          </MDBContainer>
-        </div>
+                    </MDBCardBody>
+                  </MDBCard>
+                </MDBCol>
+              </MDBRow>
+            </MDBContainer>
+          </div>
 
-        </div>
+          </div>
       </div>
-  );
+    )
 };
 
 export default UpdateInfoProfil;
