@@ -1,4 +1,3 @@
-import { MDBBtn } from "mdbreact";
 import React, { useState } from "react";
 import SignInForm from "./SignInForm";
 import SignUpForm from "./SignUpForm";
@@ -21,22 +20,21 @@ const Log = ( props ) => {
   return (
       <div className="container">
         <br/>
-        <MDBBtn style={{ backgroundColor: '#ff7979', color:'white' }}
+        <div style={{ color:'#17233e', fontWeight: 'bold', cursor: 'pointer'}}
             onClick={handleModals}
             id="register"
-            className={signUpModal ? "active-btn" : null}
+            className={signUpModal ? "active" : null}
           >
-            Nouveau ? creer votre compte ici
-          </MDBBtn>
+           <i class="fas fa-arrow-right" style={{color:'#f39200'}}></i> Nouveau ? 
+          </div>
           <br/>
-          <br/>
-          <MDBBtn style={{ backgroundColor: '#ff7979', color:'white' }}
+          <div style={{ color:'#17233e', fontWeight: 'bold', cursor: 'pointer'}}
             onClick={handleModals}
             id="login"
-            className={signInModal ? "active-btn" : null}
+            className={signInModal ? "active" : null}
           >
-            Déja membre ? connectez-vous ici
-          </MDBBtn>
+           <i class="fas fa-arrow-right" style={{color:'#f39200'}}></i> Déjà membre ?
+          </div>
 
         {signUpModal && <SignUpForm />}
         {signInModal && <SignInForm />}

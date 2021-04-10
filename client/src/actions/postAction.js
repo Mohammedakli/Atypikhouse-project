@@ -9,12 +9,18 @@ export const UNLIKE_POST = "UNLIKE_POST";
 export const UPDATE_POST = "UPDATE_POST";
 export const DELETE_POST = "DELETE_POST";
 export const ADD_COMMENT = "ADD_COMMENT";
+export const ADD_PRISE = "ADD_PRISE";
 export const EDIT_COMMENT = "EDIT_COMMENT";
+export const EDIT_RESERVATION = "EDIT_RESERVATION";
 export const DELETE_COMMENT = "DELETE_COMMENT";
 export const GET_TRENDS = "GET_TRENDS";
 export const GET_POST_ERRORS = "GET_POST_ERRORS";
 export const UPDATE_STATUS = "UPDATE_STATUS";
 export const UPDATE_CLIENT = "UPDATE_CLIENT";
+export const ADD_PIC = "ADD_PIC";
+export const ADD_RESERVATION = "ADD_RESERVATION";
+export const SEND_MAIL = "SEND_MAIL";
+export const SEND_JUSTIFICATIF = "SEND_JUSTIFICATIF";
 
 //Affichage post unique
 export const getPost = (id) => {
@@ -128,8 +134,6 @@ export const updateStatus = (postId, message, status, clientId) => {
   };
 };
 
-
-
 //Suppression post
 export const deletePost = (postId) => {
   return (dispatch) => {
@@ -154,6 +158,60 @@ export const addComment = (postId, commenterId, text, commenterPseudo) => {
     })
       .then((res) => {
         dispatch({ type: ADD_COMMENT, payload: { postId } });
+      })
+      .catch((err) => console.log(err));
+  };
+};
+
+//Ajouter une reservation
+export const addReservation = (postId, reservationId, personPseudo, paiement, date_open, date_close) => {
+  return (dispatch) => {
+    return axios({
+      method: "patch",
+      url: `${process.env.REACT_APP_API_URL}api/post/reserve-habitat/${postId}`,
+      data: {  reservationId, personPseudo, paiement, date_open, date_close },
+    })
+      .then((res) => {
+        dispatch({ type: ADD_RESERVATION, payload: { postId } });
+      })
+      .catch((err) => console.log(err));
+  };
+};
+
+//paiement
+export const editReservation = (postId, reservationId, paiement) => {
+  return (dispatch) => {
+    return axios({
+      method: "patch",
+      url: `${process.env.REACT_APP_API_URL}api/post/edit-reservation/${postId}`,
+      data: { reservationId, paiement },
+    })
+      .then((res) => {
+        dispatch({ type: EDIT_RESERVATION, payload: { postId, reservationId, paiement }});
+      })
+      .catch((err) => console.log(err));
+  };
+};
+
+//Ajouter une prise de vue
+export const addPrise = ( data, postId) => {
+  return (dispatch) => {
+    return axios 
+      .patch(`${process.env.REACT_APP_API_URL}api/post/prise-post/${postId}`, data)
+      .then((res) => {
+        dispatch({ type: ADD_PRISE, payload: res.data });
+      })
+      .catch((err) => console.log(err));
+  };
+};
+
+//Ajouter une photo
+export const addPic = ( data, postId) => {
+  return (dispatch) => {
+    return axios 
+      .patch(`${process.env.REACT_APP_API_URL}api/post/add-pic/${postId}`, data)
+      .then((res) => {
+        dispatch({ type: ADD_PIC, payload: res.data });
       })
       .catch((err) => console.log(err));
   };
@@ -188,4 +246,51 @@ export const deleteComment = (postId, commentId) => {
       .catch((err) => console.log(err));
   };
 };
+//Supprimer une reservation
+export const deleteReserve = (postId, reservationId) => {
+  return (dispatch) => {
+    return axios({
+      method: "patch",
+      url: `${process.env.REACT_APP_API_URL}api/post/delete-reserve/${postId}`,
+      data: { reservationId },
+    })
+      .then((res) => {
+        dispatch({ type: DELETE_COMMENT, payload: { postId, reservationId } });
+      })
+      .catch((err) => console.log(err));
+  };
+};
+
+
+// envoyer un mail
+export const sendEmail = (email, pseudoPro, subject, text) => {
+  return (dispatch) => {
+    return axios({
+      method: "post",
+      url: `${process.env.REACT_APP_API_URL}api/post/send-mail`,
+      data: { email, pseudoPro, subject, text }
+    })
+    .then((res) => {
+      dispatch({ type: SEND_MAIL, payload: { email, pseudoPro, subject, text } });
+    })
+    .catch((err) => console.log(err));
+
+  }
+}
+
+// envoyer un justificatif
+export const sendJustificatif = (email, pseudo, prix, titre ) => {
+  return (dispatch) => {
+    return axios({
+      method: "post",
+      url: `${process.env.REACT_APP_API_URL}api/post/send-justificatif`,
+      data: { email, pseudo, prix, titre}
+    })
+    .then((res) => {
+      dispatch({ type: SEND_JUSTIFICATIF, payload: { email, pseudo, prix, titre } });
+    })
+    .catch((err) => console.log(err));
+
+  }
+}
 

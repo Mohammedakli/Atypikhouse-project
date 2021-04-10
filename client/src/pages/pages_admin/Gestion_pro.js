@@ -24,7 +24,7 @@ const Gestion_pro = () => {
 
     return (
         <div >
-            <nav style={{ backgroundColor: 'green' }}>
+            <nav style={{ backgroundColor: 'green',  position: 'fixed', zIndex:'100' }}>
             <NavLink exact to="/gestion">
                 <h3 style={{ color: 'white', fontFamily: 'fantasy', marginLeft: '20px', paddingTop: '20px' }}>AtypikHouse@Dashboard</h3>
             </NavLink>
@@ -34,7 +34,7 @@ const Gestion_pro = () => {
                 <div className="col-3">
                     <LeftNavAdmin />
                 </div>
-                <div className="col-9">
+                <div className="col-9" style={{paddingTop: '100px'}}>
                     <br />
                     <h1>Gestion des propriétaires</h1>
                     <>
@@ -79,6 +79,7 @@ const Gestion_pro = () => {
                                                     onClick={() => {
                                                         if (window.confirm("Voulez-vous supprimer cet utilisateur ?")) {
                                                             deleteQuote(user._id);
+                                                            window.location.reload(false);
                                                             
                                                         }
                                                     }}
@@ -91,9 +92,12 @@ const Gestion_pro = () => {
                                                 </button>
                                                 {" "}
                                                 <button type="submit" className="btn btn-warning" >
-                                                    <a style={{ color: 'black' }} href={`/user_view/${user._id}`} >
+                                                    <NavLink  style={{ color: 'black' }} to={{
+                                                        pathname:'/user_view',
+                                                        search:`id=${user._id}` 
+                                                    }} exact >
                                                         <i className="fas fa-eye"></i>
-                                                    </a>
+                                                    </NavLink>
                                                 </button>
                                                 
                                             </td>

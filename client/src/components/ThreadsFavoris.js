@@ -9,7 +9,6 @@ const ThreadsFavoris = () => {
   const [count, setCount] = useState(5);
   const dispatch = useDispatch();
   const posts = useSelector((state) => state.postReducer);
-  const usersData = useSelector((state) => state.usersReducer);
   const userData = useSelector((state) => state.userReducer);
 
   const loadMore = () => {
@@ -32,14 +31,17 @@ const ThreadsFavoris = () => {
   return (
     <div className="container">
       <ul>
-        {!isEmpty(posts[0]) &&
-          posts.map((post) => {
-            for (let i = 0; i < userData.likes.length; i++) {
-              if (post._id === userData.likes[i]) {
-                return <Card post={post} key={post._id} />;
-              }
-            }
-          })}
+        {userData.likes ? (
+          !isEmpty(posts[0]) &&
+              posts.map((post) => {
+                for (let i = 0; i < userData.likes.length; i++) {
+                  if (post._id === userData.likes[i]) {
+                    return <Card post={post} key={post._id} />;
+                  }
+                }
+              })
+        ) : <p>Votre liste de favoris est vide</p>}
+            
       </ul>
     </div>
   );

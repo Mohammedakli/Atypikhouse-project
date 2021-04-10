@@ -1,5 +1,4 @@
-import { Tooltip } from "bootstrap";
-import { MDBBtn, MDBCard } from "mdbreact";
+import { MDBBtn } from "mdbreact";
 import React from "react";
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
@@ -9,7 +8,7 @@ const Parametres = () => {
     const userData = useSelector((state) => state.userReducer);
     return (
         <div>
-            <nav style={{ backgroundColor: 'green' }}>
+            <nav style={{ backgroundColor: 'green',  position: 'fixed', zIndex:'100' }}>
                 <NavLink exact to="/gestion">
                     <h3 style={{ color: 'white', fontFamily: 'fantasy', marginLeft: '20px', paddingTop: '20px' }}>AtypikHouse@Dashboard</h3>
                 </NavLink>
@@ -19,7 +18,7 @@ const Parametres = () => {
                 <div className="col-3">
                     <LeftNavAdmin />
                 </div>
-                <div className="col-9">
+                <div className="col-9" style={{paddingTop: '100px'}}>
                     <div className="container-fluid">
                         <div className="block-header">
                             <br/>

@@ -1,11 +1,14 @@
 module.exports.signUpErrors = (err) => {
-  let errors = { pseudo: "", email: "", password: "" };
+  let errors = { pseudo: "", email: "", password: "", tel: "" };
 
   if (err.message.includes("pseudo"))
     errors.pseudo = "Pseudo incorrect ou déjà pris";
 
   if (err.message.includes("email")) 
     errors.email = "Email incorrect";
+  
+  if(err.message.includes("tel"))
+    errors.tel = "Numero de téléphone incorrect";
 
   if (err.message.includes("password"))
     errors.password = "Le mot de passe doit faire au moins 8 caractères ";

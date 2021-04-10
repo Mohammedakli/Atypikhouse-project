@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
-import SignUpForm from "./SignUpForm";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn, MDBCard, MDBCardBody, MDBModalFooter } from 'mdbreact';
+import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn, MDBCard, MDBCardBody} from 'mdbreact';
 
 const SignInAdminForm = () => {
   const [email, setEmail] = useState("");
@@ -73,11 +72,6 @@ const SignInAdminForm = () => {
                 </MDBBtn>
               </div>
             </form>
-            <MDBModalFooter>
-                <div className="font-weight-light">
-                  <a href="/profil_pro">Forgot Password?</a>
-                </div>
-              </MDBModalFooter>
           </MDBCardBody>
         </MDBCard>
       </MDBCol>

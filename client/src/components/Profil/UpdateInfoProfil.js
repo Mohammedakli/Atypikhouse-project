@@ -1,9 +1,8 @@
-import React, { useState } from "react";
-import LeftNav from "../LeftNav";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
+import { useSelector } from "react-redux";
 import UpdatePicture from "./UpdatePicture";
 import { dateParser } from "../Utilitaires";
-import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn, MDBCard, MDBCardBody, MDBModalFooter } from 'mdbreact';
+import { MDBContainer, MDBRow, MDBCol, MDBCard, MDBCardBody } from 'mdbreact';
 
 
 const UpdateInfoProfil = () => {
@@ -26,6 +25,7 @@ const UpdateInfoProfil = () => {
                   <MDBCard>
                     <MDBCardBody>
                       <h1> Profil de {userData.pseudo}</h1>
+                      <h3>({userData.role})</h3>
                       <h6>Compte créé le : {dateParser(userData.createdAt)}</h6>
                       <h6>Pseudo: {userData.pseudo}</h6>
                       <h6>Email: {userData.email}</h6>

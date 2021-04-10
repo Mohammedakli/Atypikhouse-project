@@ -1,6 +1,6 @@
 import React from "react";
 
-import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn, MDBCard, MDBCardBody, MDBModalFooter } from 'mdbreact';
+import { MDBContainer, MDBRow, MDBCol, MDBCard, MDBCardBody } from 'mdbreact';
 import { useSelector } from "react-redux";
 import { dateParser, isEmpty } from "../../components/Utilitaires";
 
@@ -10,7 +10,7 @@ const User_view = (props) => {
     const usersData = useSelector((state) => state.usersReducer);
     return (
         <div >
-            <nav style={{ backgroundColor: 'green' }}>
+            <nav style={{ backgroundColor: 'green',  position: 'fixed', zIndex:'100' }}>
                 <h3 style={{ color: 'white', fontFamily: 'fantasy', marginLeft: '20px', paddingTop: '20px' }}>AtypikHouse@Dashboard</h3>
             </nav>
             <div className="container">
@@ -22,7 +22,7 @@ const User_view = (props) => {
                                 <MDBCardBody>
                                     {!isEmpty(usersData[0]) &&
                                         usersData.map((users) => {
-                                            if (users._id === props.match.params.id) {
+                                            if (`?id=${users._id}` === props.location.search) {
                                                 return (
                                                     <>
                                                         <h1> Profil de {users.pseudo}</h1>
@@ -32,14 +32,14 @@ const User_view = (props) => {
                                                         <ul>
                                                             <li>Pseudo: {users.pseudo}</li>
                                                             <li>Email: {users.email}</li>
+                                                            <li>Tel: {users.tel}</li>
                                                         </ul>
                                                         </div>
                                                         <div className="col-6">
                                                             <div className="left-part">
                                                             <h3>Photo de profil</h3>
-                                                            <img height="400"
+                                                            <img height="400" width="100%"
                                                                 src={users.picture} alt="user-pic" />
-                                                                {users.picture}
                                                             </div>
                                                         </div>
                                                         </div>

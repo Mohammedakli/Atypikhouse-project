@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
-const { isEmail } = require('validator');
+const { isEmail} = require('validator');
 const bcrypt = require('bcrypt');
-
 const user_schema = new mongoose.Schema(
   {
     pseudo: {
@@ -19,6 +18,12 @@ const user_schema = new mongoose.Schema(
       lowercase: true,
       unique: true,
       trim: true,
+    },
+    tel: {
+      type: Number,
+      required: true,
+      trim: true,
+      unique: true,
     },
     password: {
       type: String,

@@ -1,6 +1,5 @@
 import React, { useContext, useState } from "react";
 import { UidContext } from "../components/UserIdConnect";
-import LeftNav from "../components/LeftNav";
 import ThreadsFavoris from "../components/ThreadsFavoris";
 import Dropdown from '../components/PageAccueil/Dropdown';
 import NavBar from '../components/PageAccueil/NavBar';
@@ -18,13 +17,13 @@ const Favoris = () => {
     <>
     <NavBar toggle={toggle}/>
     <Dropdown isOpen={isOpen} toggle={toggle}/>
-    <div className="container" style={{paddingTop:'10%'}}>
+    <div className="container" style={{paddingTop: '60px'}}>
       <div className="container">
         <div className="row">
           <div className="col-1">
           </div>
           <div className="col-11">
-            <br/>
+            
             <p>Liste de mes favoris</p>
             <div className="main">
               <div className="home-header">

@@ -5,6 +5,8 @@ import postReducer from './post.reducer';
 import errorReducer from './error.reducer';
 import allPostsReducer from './posts.reducres';
 import bestofReducer from './bestof.reducer';
+import paramReducer from './param.reducer';
+import sectionReducer from './section.reducer';
 
 export default combineReducers({
   userReducer,
@@ -12,5 +14,7 @@ export default combineReducers({
   postReducer,
   errorReducer,
   allPostsReducer,
-  bestofReducer
+  bestofReducer,
+  paramReducer,
+  sectionReducer
 });

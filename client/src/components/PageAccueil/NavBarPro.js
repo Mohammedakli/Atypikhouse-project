@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import { UidContext } from "../UserIdConnect";
 import styled, { css } from "styled-components/macro"
 import {Link}  from 'react-router-dom'
-import { menuData, menuDataLocaitaire, menuDataPro } from '../../data/MenuData';
+import { menuData, menuDataPro } from '../../data/MenuData';
 import { Button } from './Button';
 import { FaBars } from 'react-icons/fa';
 import Logout from '../Log/Logout';
@@ -17,6 +17,7 @@ const Nav = styled.nav`
     z-index: 100;
     position: fixed;
     width: 100%;
+    background-color:#f39200;
 `;
 
 const NavLink = css`
@@ -26,6 +27,12 @@ const NavLink = css`
     padding: 0 1rem;
     cursor: pointer;
     text-decoration: none;
+
+    &:hover {
+        transform: translateY(-2px);
+        color: #17233e;
+        font-weight: bold;
+    }
 `
 
 
@@ -38,7 +45,7 @@ const Logo = styled(Link)`
 const MenuBars = styled(FaBars)`
     display: none;
 
-    @media screen and (max-width: 768px){
+    @media screen and (max-width: 1007px){
         display: block;
     }
 `;
@@ -48,7 +55,7 @@ const NavMenu = styled.div`
     align-items: center;
     margin-right: -48px;
 
-    @media screen and (max-width: 768px){
+    @media screen and (max-width: 1007px){
         display: none;
     }
 `;
@@ -75,6 +82,14 @@ const NavBarPro = ({toggle}) => {
     return (
         <Nav>
             <Logo><h3 style={{ color: 'white', fontFamily: 'fantasy' }}>AtypikHouse</h3></Logo>
+            {uid &&
+                <NavMenuLinks to='profil'>
+                    <img height="40" width="40" style={{ borderRadius: "50%" }}
+                    src={userData.picture}     
+                    alt="poster-pic"
+                    />
+                </NavMenuLinks>
+            }
             <MenuBars onClick={toggle}/>
             <NavMenu>
             {uid ? (
@@ -95,7 +110,7 @@ const NavBarPro = ({toggle}) => {
                 )}
             </NavMenu>
             <NavBtn>
-                <Button to="/homepro" primary='true'>Home</Button>
+                <Button to="/homepro" primary='true'>Accueil</Button>
             </NavBtn>
         </Nav>
     )

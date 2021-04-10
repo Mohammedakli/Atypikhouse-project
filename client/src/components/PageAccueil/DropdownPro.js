@@ -1,11 +1,10 @@
 import React, {useContext} from 'react'
 import { UidContext } from "../UserIdConnect";
 import styled from 'styled-components'
-import { menuData, menuDataLocaitaire, menuDataPro } from '../../data/MenuData';
+import { menuData, menuDataPro } from '../../data/MenuData';
 import { Button } from './Button';
 import {Link} from 'react-router-dom';
 import { FaTimes } from 'react-icons/fa';
-import { useSelector } from 'react-redux';
 import Logout from '../Log/Logout';
 
 
@@ -64,7 +63,8 @@ const DropdownLink = styled(Link)`
     transition: 0.2s ease-in-out;
 
     &:hover {
-        color: #000d1a;
+        color: #17233e;
+        font-weight: bold;
     }
 `;
 const BtnWrap = styled.div`
@@ -75,7 +75,6 @@ const BtnWrap = styled.div`
 const DropdownPro = ({isOpen, toggle}) => {
 
     const uid = useContext(UidContext);
-    const userData = useSelector((state) => state.userReducer);
 
     return (
         <DropdownContainer isOpen={isOpen} onClick={toggle}>
@@ -106,7 +105,7 @@ const DropdownPro = ({isOpen, toggle}) => {
                 </DropdownMenu>
                 <BtnWrap>
                     <Button primary="true" round="true" to="/homepro">
-                        Home
+                        Accueil
                     </Button>
                 </BtnWrap>
             </DropdownWrapper>

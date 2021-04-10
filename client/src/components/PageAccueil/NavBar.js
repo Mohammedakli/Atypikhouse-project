@@ -10,6 +10,7 @@ import { useSelector } from 'react-redux';
 
 
 const Nav = styled.nav`
+    color: #fff;
     height : 60px;
     display: flex;
     justify-content: space-between;
@@ -17,6 +18,7 @@ const Nav = styled.nav`
     z-index: 100;
     position: fixed;
     width: 100%;
+    background-color:#f39200;
 `;
 
 const NavLink = css`
@@ -26,6 +28,12 @@ const NavLink = css`
     padding: 0 1rem;
     cursor: pointer;
     text-decoration: none;
+
+    &:hover {
+        transform: translateY(-2px);
+        color: #17233e;
+        font-weight: bold;
+    }
 `
 
 
@@ -37,8 +45,9 @@ const Logo = styled(Link)`
 
 const MenuBars = styled(FaBars)`
     display: none;
+    cursor: pointer;
 
-    @media screen and (max-width: 768px){
+    @media screen and (max-width: 1007px){
         display: block;
     }
 `;
@@ -48,13 +57,14 @@ const NavMenu = styled.div`
     align-items: center;
     margin-right: -48px;
 
-    @media screen and (max-width: 768px){
+    @media screen and (max-width: 1007px){
         display: none;
     }
 `;
 
 const NavMenuLinks = styled(Link)`
     ${NavLink}
+    
 `;
 
 const NavBtn = styled.div`
@@ -75,6 +85,14 @@ const NavBar = ({toggle}) => {
     return (
         <Nav>
             <Logo to='/accueil'><h3 style={{ color: 'white', fontFamily: 'fantasy' }}>AtypikHouse</h3></Logo>
+            {uid &&
+                <NavMenuLinks to='profil'>
+                    <img height="40" width="40" style={{ borderRadius: "50%" }}
+                    src={userData.picture}     
+                    alt="poster-pic"
+                    />
+                </NavMenuLinks>
+            }
             <MenuBars onClick={toggle}/>
             <NavMenu>
             {uid ? (
@@ -95,7 +113,7 @@ const NavBar = ({toggle}) => {
                 )}
             </NavMenu>
             <NavBtn>
-                <Button to="/home" primary='true'>Home</Button>
+                <Button to="/home" primary='true'>Accueil</Button>
             </NavBtn>
         </Nav>
     )

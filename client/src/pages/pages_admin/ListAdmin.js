@@ -3,18 +3,12 @@ import LeftNavAdmin from "../../components/LeftNavAdmin";
 import { MDBTable, MDBTableBody, MDBTableFoot, MDBTableHead } from 'mdbreact';
 import { dateParser, isEmpty } from "../../components/Utilitaires";
 import { useSelector} from "react-redux";
-import { deleteUser } from "../../actions/userAction"
-import { useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
-import Navbar from "../../components/Navbar";
 
 const ListAdmin = () => {
     const [isLoading, setIsLoading] = useState(true);
     const usersData = useSelector((state) => state.usersReducer);
     const userData = useSelector((state) => state.userReducer);
-    const posts = useSelector((state) => state.postReducer);
-    const dispatch = useDispatch();
-    const deleteQuote = id => dispatch(deleteUser(id));
     
 
     useEffect(() => {
@@ -25,7 +19,7 @@ const ListAdmin = () => {
 
     return (
         <div >
-            <nav style={{ backgroundColor: 'green' }}>
+            <nav style={{ backgroundColor: 'green',  position: 'fixed', zIndex:'100' }}>
             <NavLink exact to="/gestion">
                 <h3 style={{ color: 'white', fontFamily: 'fantasy', marginLeft: '20px', paddingTop: '20px' }}>AtypikHouse@Dashboard</h3>
             </NavLink>
@@ -35,7 +29,7 @@ const ListAdmin = () => {
                 <div className="col-3">
                     <LeftNavAdmin />
                 </div>
-                <div className="col-9">
+                <div className="col-9" style={{paddingTop: '100px'}}>
                     <br />
                     <h1>Liste des Administrateurs
                         <div style={{textAlign:'right', paddingRight:'30px'}}>

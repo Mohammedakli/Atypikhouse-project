@@ -4,6 +4,7 @@ import { UidContext } from "./components/UserIdConnect";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { getUser } from "./actions/userAction";
+import GlobalStyle from "./pages/page_accueil/globalStyles";
 
 const App = () => {
   const [uid, setUid] = useState(null);
@@ -28,7 +29,8 @@ const App = () => {
 
   return (
     <UidContext.Provider value={uid}>
-      <Routes />
+      <GlobalStyle/>
+        <Routes />
     </UidContext.Provider>
   );
 };

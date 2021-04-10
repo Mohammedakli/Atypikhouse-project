@@ -54,7 +54,6 @@ const CardComments = ({ post }) => {
             <div className="right-part">
               <div className="comment-header">
                 <div className="pseudo">
-                  <h3></h3> 
                 </div>
                 
               </div>

@@ -3,12 +3,12 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const userRoutes = require('./routes/user_route');
 const postRoutes = require('./routes/post_route');
+const paramRoutes = require('./routes/param_route');
+const sectionRoutes = require('./routes/section_route');
 require('dotenv').config({path: './config/.env'});
 require('./config/db');
 const {checkUser, requireAuth} = require('./middleware/middleware');
 const cors = require('cors');
-const stripe = require("stripe")("sk_test_51IQafJDRHvU06AUoyvDxQUsVuvq58MJCDXzx5VZw4OqtkHCpAuXaOR9TJzwdCf56bEeuLqTGsUd5CX7MQvLJfo9w00QPnJOnbT");
-const uuid = require("uuid");
 
 const app = express();
 
@@ -29,6 +29,9 @@ app.use(cookieParser());
 // Routes d'accès aux utilisateurs et aux posts
 app.use('/api/user', userRoutes);
 app.use('/api/post', postRoutes);
+app.use('/api/param', paramRoutes);
+app.use('/api/section', sectionRoutes);
+
 
 // MIDDLEWARE
 app.use(express.json())

@@ -5,7 +5,6 @@ export const menuData = [
 ]
 
 export const menuDataLocaitaire = [
-    { title: 'Rechercher', link: '/search'},
     { title: 'Reservations', link: '/mes_reservations'},
     { title: 'Favoris', link: '/favoris'},
     { title: 'Profil', link: '/profil'}

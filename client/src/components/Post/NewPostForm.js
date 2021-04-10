@@ -3,25 +3,27 @@ import { useDispatch, useSelector } from "react-redux";
 import { isEmpty } from "../Utilitaires";
 import { addPost, getPosts } from "../../actions/postAction";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn, MDBCard, MDBCardBody, MDBModalFooter } from 'mdbreact';
-
+import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn, MDBCard, MDBCardBody} from 'mdbreact';
+import {GoogleData } from "../../data/GoogleData";
 
 
 const NewPostForm = () => {
   const [isLoading, setIsLoading] = useState(true);
+  const [formSubmit, setFormSubmit] = useState(false);
   const [message, setMessage] = useState("");
   const [titre, setTitre] = useState("");
   const [superficie, setSuperficie] = useState("");
   const [prix, setPrix] = useState("");
   const [date_open, setDate_open] = useState("");
   const [date_close, setDate_close] = useState("");
-  const [localisation, setLocalisation] = useState("");
-  const [codepostal, setCodepostal] = useState("");
+  const [departement, setDepartement] = useState("");
+  const [lng, setLng] = useState("");
+  const [lat, setLat] = useState("");
   const [type, setType] = useState("");
   const [nbr_personne, setNbr_personne] = useState("");
-  const status = 'non_reservé';
+  const status = 'ajout_images';
   const clientId = null;
-  const [postPicture, setPostPicture] = useState(null);
+  const [postPicture, setPostPicture] = useState("");
   const [video, setVideo] = useState("");
   const [file, setFile] = useState([]);
   const userData = useSelector((state) => state.userReducer);
@@ -30,21 +32,15 @@ const NewPostForm = () => {
 
   const [selectedImages, setSelectedImages] = useState([])
   const imageHandleChange = (e) => {
-      console.log(e.target.files)
       if(e.target.files) {
         const fileArray = Array.from(e.target.files).map((file) => URL.createObjectURL(file))
-        console.log(fileArray);
+       
         setSelectedImages((prevImages) =>prevImages.concat(fileArray));
         setFile(e.target.files[0]);
-        setVideo('');
-        console.log(file)
-        Array.from(e.target.files).map(
-          (file)=>URL.revokeObjectURL(file)
-        );
       }
+
   };
   const renderPhotos = (source) => {
-		console.log('source: ', source);
 		return source.map((photo) => {
 			return <img height="200px" width="50%" src={photo} alt="" key={photo} />;
 		});
@@ -57,7 +53,8 @@ const NewPostForm = () => {
   }; 
   */
 
-  const handlePost = async () => {
+  const handlePost = async (e) => {
+    e.preventDefault();
     if (message || postPicture || video) {
       const data = new FormData();
       data.append('posterId', userData._id);
@@ -67,8 +64,9 @@ const NewPostForm = () => {
       data.append('prix', prix);
       data.append('date_open', date_open);
       data.append('date_close', date_close);
-      data.append('localisation', localisation);
-      data.append('codepostal', codepostal);
+      data.append('departement', departement);
+      data.append('lng', lng);
+      data.append('lat', lat);
       data.append('type', type);
       data.append('status', status);
       data.append('clientId', clientId);
@@ -78,8 +76,9 @@ const NewPostForm = () => {
       await dispatch(addPost(data));
       dispatch(getPosts());
       cancelPost();
+      setFormSubmit(true);
     } else {
-      alert("Veuillez entrer une description brève de votre offre")
+      alert("Veuillez entrer toutes les informations ")
     }
   };
  
@@ -90,8 +89,9 @@ const NewPostForm = () => {
     setPrix("");
     setDate_open("");
     setDate_close("");
-    setLocalisation("");
-    setCodepostal("");
+    setDepartement("");
+    setLat("");
+    setLng("");
     setType("");
     setPostPicture("");
     setVideo("");
@@ -123,17 +123,29 @@ const NewPostForm = () => {
 
   return (
     <>
-      {isLoading ? (
-        <i className="fas fa-spinner fa-pulse"></i>
+      {formSubmit ? (
+         <>
+         <h4 className="success" style={{textAlign:'center', paddingTop:'15%'}}>
+             Votre publication a bien été enregistrée, rendez-vous dans la rubrique "Mes offres" pour ajouter 4 autres images.
+             <br/> Ce nombre d'image est requis suite a une expérience des locataires. 
+             <br/>
+             Après cette étape, votre publication devra être valider par notre équipe, pour figurer sur liste des offres.
+         </h4>
+         <div class="success-animation">
+             <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52"><circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" /><path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" /></svg>
+         </div>
+         
+         <span></span>
+         </>
       ) : (
         <>
-        <MDBContainer>
+    <MDBContainer>
     <MDBRow>
       <MDBCol md="12">
         <MDBCard >
           <MDBCardBody>
             <p style={{backgroundColor:'#ff9f1a'}}>Déposer votre annonce</p>
-            <form action="">
+            <form action="" enctype="multipart/form-data" >
               <div className="grey-text">
                 <MDBInput
                 required
@@ -144,44 +156,59 @@ const NewPostForm = () => {
                   onChange={(e) => setTitre(e.target.value)}
                   value={titre}
                 />
-                 <MDBInput
-                 required
-                  label="type"
-                  type="text"
-                  name="ttype"
-                  id="type"
-                  onChange={(e) => setType(e.target.value)}
-                  value={type}
-                />
-                 <MDBInput
-                  label="superficie"
+                <br/>
+                  <select  name="type" id="type" onChange={(e) => setType(e.target.value)} value={type}  class="browser-default custom-select" >
+                    <option value="">----- Type -----</option>
+                    <option value="cabane dans les arbres">cabane dans les arbres</option>
+                    <option value="cabane flottante">cabane flottante</option>
+                    <option value="yourte">yourte</option>
+                    <option value="yourte">Autre</option>
+                  </select>
+               
+                <MDBInput
+                  label="superficie (m²)"
                   type="number"
                   name="superficie"
                   id="superficie"
                   onChange={(e) => setSuperficie(e.target.value)}
                   value={superficie}
                 />
+                <br/>
+                <select  name="departement" id="departement" onChange={(e) => setDepartement(e.target.value)} value={departement}  class="browser-default custom-select" >
+                          <option value="">--- Département ---</option>
+                    {GoogleData.sort((a, b) => {
+                      if(a.name < b.name) return -1;
+                      if(a.name > b.name) return 1;
+                    }).map((val, key) => {
+                      return (
+                          <option value={val.name} key={key}>{val.name}</option>
+                          )
+                      })} 
+                </select>
+                <div className="row">
+                  <div className="col-6">
+                    <MDBInput
+                      label="Longitude"
+                      type="number"
+                      name="lng"
+                      id="lng"
+                      onChange={(e) => setLng(e.target.value)}
+                      value={lng}
+                    />
+                  </div>
+                  <div className="col-6">
+                    <MDBInput
+                      label="Latitude"
+                      type="number"
+                      name="lat"
+                      id="lat"
+                      onChange={(e) => setLat(e.target.value)}
+                      value={lat}
+                    />
+                  </div>
+                </div>
                 <MDBInput
-                required
-                  label="codepostal"
-                  type="number"
-                  name="codepostal"
-                  id="codepostal"
-                  onChange={(e) => setCodepostal(e.target.value)}
-                  value={codepostal}
-                />
-                <MDBInput
-                required
-                  label="localisation"
-                  type="text"
-                  name="localisation"
-                  id="localisation"
-                  onChange={(e) => setLocalisation(e.target.value)}
-                  value={localisation}
-                />
-                <MDBInput
-                required
-                  label="prix"
+                  label="prix (€) /nuit"
                   type="number"
                   name="prix"
                   id="prix"
@@ -220,7 +247,6 @@ const NewPostForm = () => {
                   id="exampleFormControlTextarea2" 
                   rows="3"
                   name="message"
-                  id="message"
                   placeholder="Décrivez votre offre..."
                   onChange={(e) => setMessage(e.target.value)}
                   value={message}
@@ -231,9 +257,9 @@ const NewPostForm = () => {
                     {isEmpty(video) && (
                       <>
                         <input
-                          multiple
+                          required
                           type="file"
-                          id="file-upload"
+                          id="file"
                           name="file"
                           accept=".jpg, .jpeg, .png"
                           onChange={imageHandleChange}

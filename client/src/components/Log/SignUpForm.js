@@ -2,31 +2,49 @@ import React, { useState } from "react";
 import axios from "axios";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import SignInForm from "./SignInForm";
-import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn, MDBCard, MDBCardBody, MDBModalFooter } from 'mdbreact';
-
+import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn, MDBCard, MDBCardBody } from 'mdbreact';
+import Recaptcha from 'react-recaptcha';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const SignUpForm = () => {
   const [formSubmit, setFormSubmit] = useState(false);
+  const [verify, setVerify] = useState(false);
   const [pseudo, setPseudo] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [controlPassword, setControlPassword] = useState("");
+  const [ tel, setTel] = useState("");
   const role = "client";
 
+  const verifyCallback = (res) => {
+    setVerify(true);
+  }
+  
   const handleRegister = async (e) => {
     e.preventDefault();
     const terms = document.getElementById("terms");
     const pseudoError = document.querySelector(".pseudo.error");
     const emailError = document.querySelector(".email.error");
+    const telError = document.querySelector(".tel.error");
     const passwordError = document.querySelector(".password.error");
-    const passwordConfirmError = document.querySelector(
-      ".password-confirm.error"
-    );
+    const passwordConfirmError = document.querySelector(".password-confirm.error");
     const termsError = document.querySelector(".terms.error");
 
+    const notifySuccess = () => {
+      toast.success('Inscription réussite!', {
+        position: "top-right",
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        });
+    }
+    
     passwordConfirmError.innerHTML = "";
     termsError.innerHTML = "";
-
+   
     if (password !== controlPassword || !terms.checked) {
       if (password !== controlPassword)
         passwordConfirmError.innerHTML =
@@ -41,6 +59,7 @@ const SignUpForm = () => {
         data: {
           pseudo,
           email,
+          tel,
           password,
           role,
         },
@@ -50,23 +69,36 @@ const SignUpForm = () => {
           if (res.data.errors) {
             pseudoError.innerHTML = res.data.errors.pseudo;
             emailError.innerHTML = res.data.errors.email;
+            telError.innerHTML = res.data.errors.tel;
             passwordError.innerHTML = res.data.errors.password;
           } else {
             setFormSubmit(true);
+            notifySuccess();
           }
         })
         .catch((err) => console.log(err));
     }
   };
 
+  const recaptchaLoaded = () => {
+    console.log('reussi');
+  }
+
   return (
     <>
       {formSubmit ? (
         <>
-        <p className="success" style={{color:'green'}}>
-            Enregistrement réussi, veuillez-vous connecter!
-          </p>
           <SignInForm />
+          <ToastContainer
+            position="top-right"
+            hideProgressBar={false}
+            newestOnTop
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+          />
           <span></span>
         </>
       ) : (
@@ -100,7 +132,17 @@ const SignUpForm = () => {
                       value={email}
                     />
                     <div className="email error"></div>
-                    
+                    <MDBInput
+                      htmlFor="tel"
+                      label="Téléphone"
+                      icon="phone"
+                      type="number"
+                      name="tel"
+                      id="tel"
+                      onChange={(e) => setTel(e.target.value)}
+                      value={tel}
+                    />
+                    <div className="tel error"></div>
                     <MDBInput
                       htmlFor="password"
                       label="Mot de passe"
@@ -133,20 +175,27 @@ const SignUpForm = () => {
                     </label>
                    <div className="terms error"></div>
                   </div>
+                  <div className="font-weight-light">
+                    <Recaptcha
+                      required
+                      sitekey="6Le2EYkaAAAAADc5n5rxwdOfQ9NnAEFIbwQJEajb"
+                      render="explicit"
+                      verifyCallback={verifyCallback}
+                      onloadCallback={recaptchaLoaded}
+                    />
+                  </div>
                   <div className="text-center py-4 mt-3">
-                    <MDBBtn type="submit">
+                  { verify ? (
+                     <MDBBtn type="submit">
                     Valider inscription
                     </MDBBtn>
+                  ) : (
+                    <div></div>
+                  )
+                  }
+                   
                   </div>
                 </form>
-                <MDBModalFooter>
-                <div className="font-weight-light">
-                  <p>Yet member? {" "}
-                      <a href="/">
-                      Sign in
-                      </a> </p>
-                </div>
-              </MDBModalFooter>
               </MDBCardBody>
             </MDBCard>
           </MDBCol>

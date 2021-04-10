@@ -29,7 +29,9 @@ const LikeButton = ({ post }) => {
     <div className="like-container">
       {uid === null && (
         <Popup
-          trigger={<img src="./img/icons/etoile.png" alt="like" />}
+          trigger={<img 
+            width="20px"
+            src="./img/icons/etoile.png" alt="like" />}
           position={["bottom center", "bottom right", "bottom left"]}
           closeOnDocumentClick
         >
@@ -37,10 +39,10 @@ const LikeButton = ({ post }) => {
         </Popup>
       )}
       {uid && liked === false && (
-        <img src="./img/icons/etoile.png" onClick={like} alt="like" />
+        <img  width="20px" src="./img/icons/etoile.png" onClick={like} alt="like" />
       )}
       {uid && liked && (
-        <img src="./img/icons/etoile-filled.png" onClick={unlike} alt="unlike" />
+        <img width="20px" src="./img/icons/etoile-filled.png" onClick={unlike} alt="unlike" />
       )}
       
     </div>

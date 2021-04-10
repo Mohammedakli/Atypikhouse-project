@@ -33,10 +33,10 @@ const ThreadClient = () => {
       <ul>
         {!isEmpty(posts[0]) &&
           posts.map((post) => {
-              if ((post.clientId === userData._id) && (post.status !== "refusé")) {
+              if ((post.clientId === userData._id) && (post.status !== "refusé") && (post.status !== "non_reservé")) {
                 return <Card post={post} key={post._id} />;
-              }
-          })}
+              } 
+        })}
       </ul>
     </div>
   );

@@ -15,7 +15,6 @@ const DeleteCard = (props) => {
         }
       }}
     >
-       <span style={{fontSize:'12px'}}>supprimer </span>
        <i className="fas fa-trash"></i>
       
     </div>

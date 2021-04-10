@@ -23,23 +23,24 @@ const Trends = () => {
   }, [posts, dispatch]);
 
   return (
-    <div className="bestof-container">
+    <div>
       <br />
-      <h4>Nos BEST of</h4>
+      <h6 style={{textAlign: 'center', fontWeight: 'bold', color:'#17233e'}}>Nos BEST of</h6>
       <NavLink exact to="/bestof">
 
         <ul>
           {trendList.length &&
             trendList.map((post) => {
-              return (<MDBCard>
+              return (<MDBCard style={{backgroundColor: '#f5f6fa', border:'1px solid #f39200', borderRadius: "10px"}}>
                 <li key={post._id}>
                   <div>
-                    {post.picture && <img height="200" width='100%' src={post.picture} alt="post-pic" />}
+                    {(post.picture[0] !== "") && <img height="200" width='100%' style={{ borderRadius: "10px", paddingBottom: '5px' }} src={post.picture[0]} alt="post-pic" />}
                     {post.video && (
                       <iframe
                         src={post.video}
                         height="200"
                         width='100%'
+                        style={{borderRadius: '10px'}}
                         frameBorder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         allowFullScreen

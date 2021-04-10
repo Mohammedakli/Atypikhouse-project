@@ -23,9 +23,9 @@ const Logout = () => {
   };
 
   return (
-  <a href="/accueil">
-    <div onClick={logout} style={{textAlign:'right'}}>
-        {"  "}Déconnexion
+  <a href="/">
+    <div onClick={logout} style={{textAlign:'center', paddingLeft:'82%', paddingRight:'18%'}}>
+        {"  "}<i class="fas fa-power-off" style={{color:'#17233e'}}></i>
     </div>
   </a>
     

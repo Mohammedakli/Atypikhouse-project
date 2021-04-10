@@ -7,10 +7,13 @@ import { applyMiddleware, createStore } from "redux";
 import thunk from "redux-thunk";
 import rootReducer from "./reducers";
 import { getUsers } from "./actions/usersAction";
+import 'antd/dist/antd.css';
 
 // dev tools
 import { composeWithDevTools } from "redux-devtools-extension";
 import { getPosts } from "./actions/postAction";
+import { getParam } from "./actions/paramAction";
+import { getSection } from "./actions/sectionAction";
 
 const store = createStore(
   rootReducer,
@@ -19,7 +22,8 @@ const store = createStore(
 
 store.dispatch(getUsers());
 store.dispatch(getPosts());
-//store.dispatch(getPost());
+store.dispatch(getParam());
+store.dispatch(getSection())
 
 ReactDOM.render(
   <Provider store={store}>

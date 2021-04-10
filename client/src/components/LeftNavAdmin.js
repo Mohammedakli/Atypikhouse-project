@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import { useSelector } from "react-redux";
 import { NavLink } from 'react-router-dom';
 import { UidContext } from './UserIdConnect';
 import Logout from './Log/Logout';
@@ -14,26 +13,40 @@ const LeftNavAdmin = () => {
           <br/>
           { uid ? (
             <>
-              <NavLink to='/gestion_clients' exact >
-                  Gestion des clients
+              <NavLink to='/gestion' exact >
+                  PRESENTATION
               </NavLink>
-              <hr/>
+              <br/>
+              <br/>
               <NavLink to='/gestion_pro' exact >
-                  Gestion des propriétaires
+                  PROPRIETAIRES
               </NavLink>
-              <hr/>
-              <NavLink to='/gestion_pubs' exact >
-                  Gestion des Publications
-              </NavLink>
-              <hr/>
+              <br/>
+              <br/>
               <NavLink to='/parametres' exact >
-                  Paramètres
+                  PARAMETRES
               </NavLink>
-              <hr/>
+              <br/>
+              <br/>
+              <NavLink to='/pub_attente' exact >
+                  VALIDATION
+              </NavLink>
+              <br/>
+              <br/>
+              <NavLink to='/gestion_pubs' exact >
+                  HABITATS
+              </NavLink>
+             <br/>
+             <br/>
+              <NavLink to='/gestion_clients' exact >
+                  CLIENTS
+              </NavLink>
+              <br/>
+              <br/>
                 <NavLink to=''>
                 <Logout/>
               </NavLink>
-              <hr/>
+              
             </>
           ) : (
             ""

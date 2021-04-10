@@ -1,4 +1,3 @@
-import { MDBBtn } from "mdbreact";
 import React, { useState } from "react";
 import SignInProForm from "./SignInProForm";
 import SignUpProForm from "./SignUpProForm";
@@ -22,22 +21,21 @@ const Index_pro = ( props ) => {
       <div className="container" style={{paddingTop:'10px'}}>
         <br/>
         
-          <MDBBtn style={{ backgroundColor: '#ff7979', color:'white' }}
+        <div style={{ color:'#17233e', fontWeight: 'bold', cursor: 'pointer'}}
             onClick={handleModals}
             id="register"
             className={signUpModal ? "active-btn" : null}
           >
-             Nouveau propriétaire ? creer votre compte ici
-          </MDBBtn>
+             <i class="fas fa-arrow-right" style={{color:'#f39200'}}></i>Nouveau propriétaire ?
+          </div>
           <br/>
-          <br/>
-          <MDBBtn style={{ backgroundColor: '#ff7979', color:'white' }}
+          <div style={{ color:'#17233e', fontWeight: 'bold', cursor: 'pointer'}}
             onClick={handleModals}
             id="login"
             className={signInModal ? "active-btn" : null}
           >
-            Déjà propriétaire chez vous ? connectez-vous ici
-          </MDBBtn>
+            <i class="fas fa-arrow-right" style={{color:'#f39200'}}></i>Déjà propriétaire ?
+          </div>
         
         {signUpModal && <SignUpProForm />}
         {signInModal && <SignInProForm />}

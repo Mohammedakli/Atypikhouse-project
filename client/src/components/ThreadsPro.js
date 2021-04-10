@@ -33,7 +33,7 @@ const ThreadsPro = () => {
       <ul>
         {!isEmpty(posts[0]) &&
           posts.map((post) => {
-              if (post.posterId === userData._id) {
+              if ((post.posterId === userData._id) && (post.status !== "validation")) {
                 return <Card post={post} key={post._id} />;
               }
           })}

@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { dateParser, isEmpty } from "../Utilitaires";
-import LikeButton from "./LikeButton";
-import { updatePost } from "../../actions/postAction";
+import { updatePost, updateStatus } from "../../actions/postAction";
 import DeleteCard from "./DeleteCard";
 import CardComments from "./CardComments";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { MDBCard } from 'mdbreact';
-import Popup from "reactjs-popup";
 import { useContext } from "react";
 import { UidContext } from "../UserIdConnect";
+import CardaddPic from "./CardaddPic";
 
 const CardAdmin = ({ post }) => {
     const [isLoading, setIsLoading] = useState(true);
@@ -17,9 +16,44 @@ const CardAdmin = ({ post }) => {
     const [textUpdate, setTextUpdate] = useState(null);
     const [showComments, setShowComments] = useState(false);
     const usersData = useSelector((state) => state.usersReducer);
-    const userData = useSelector((state) => state.userReducer);
     const dispatch = useDispatch();
     const uid = useContext(UidContext);
+    const [modalPic, setModalPic] =  useState(false);
+
+    const validePublication = () => {
+        dispatch(updateStatus(post._id, post.message, "non_reservé", post.clientId));
+    }
+
+    
+  const ajoutImg = () => {
+      return (
+            <>
+              <div onClick={() => setModalPic(true)} style={{cursor:'pointer'}} data-toggle="modal" data-target="#exampleModalPic" >
+                <i className="fas fa-image"></i>
+              </div>
+              {modalPic && (
+                <div class="modal fade" id="exampleModalPic" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Images</h5>
+                    </div>
+                    <div class="modal-body">
+                      <CardaddPic post={post} key={post._id} />
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+                )
+              }
+            </>
+      ) 
+    
+  }
+
 
     const status = () => {
         if (post.status === 'réservé') {
@@ -30,7 +64,17 @@ const CardAdmin = ({ post }) => {
           return (<span style={{fontSize:'12px', backgroundColor:'#ff9f1a', borderRadius:"4px 8px"}}>Annulé</span>)
         } else if (post.status === 'non_reservé') {
           return (<span style={{fontSize:'12px', backgroundColor:'#ff9f1a', borderRadius:"4px 8px"}}>Non reservé</span>)
-        } 
+        } else if (post.status === 'validation') {
+            return (
+              <div>
+                <span style={{fontSize:'12px', backgroundColor:'#25fde9', borderRadius:"4px 8px"}}>En attente</span>
+                
+                <form action="" onClick={validePublication}>
+                  <button type="submit" >Valider</button>
+                </form>
+              </div>
+              )
+          } 
     }
 
     const updateItem = () => {
@@ -54,37 +98,38 @@ const CardAdmin = ({ post }) => {
                     ) : (
                         <>
                             <div className="round">
-                                <br />
-                                <h6>
-                                    <img height="40" width="40" style={{ borderRadius: "50%" }}
-                                        src={
-                                            !isEmpty(usersData[0]) &&
-                                            usersData
-                                                .map((user) => {
-                                                    if (user._id === post.posterId) return user.picture;
-                                                    else return null;
-                                                })
-                                                .join("")
-                                        }
-                                        alt="poster-pic"
-                                    />
-                                    {"  "}
-                                    {!isEmpty(usersData[0]) &&
-                                        usersData
-                                            .map((user) => {
-                                                if (user._id === post.posterId) return user.pseudo;
-                                                else return null;
-                                            })
-                                            .join("")}
-                                    <div className="col-sm" style={{textAlign:'right'}}>
-                                                <img src="./img/camera.png" title="Prise de vue locataire"/>
-                                        
-                                        </div>
-
-
-                                </h6>
-
-                            </div>
+                  <h6 style={{paddingTop: '3px'}}>
+                    <div className="row">
+                      <div className="col-6">
+                        <img height="40" width="40" style={{ borderRadius: "50%" }}
+                          src={
+                            !isEmpty(usersData[0]) &&
+                            usersData
+                              .map((user) => {
+                                if (user._id === post.posterId) return user.picture;
+                                else return null;
+                              })
+                              .join("")
+                          }
+                          alt="poster-pic"
+                        />
+                        {"  "}
+                        {!isEmpty(usersData[0]) &&
+                          usersData
+                            .map((user) => {
+                              if (user._id === post.posterId) return user.pseudo;
+                              else return null;
+                            })
+                            .join("")}
+                      </div>
+                      <div className="col-6">
+                        <div className="col-sm" style={{textAlign:'right'}}>
+                          {ajoutImg()}
+                          </div>
+                      </div>
+                    </div>
+                  </h6>
+                </div>
                             <div>
                                 <div>
                                     <div>
@@ -97,7 +142,7 @@ const CardAdmin = ({ post }) => {
                                         {uid ? (
                                             <div>
                                                 {post.picture && (
-                                                    <img height="200" width="100%" src={post.picture} alt="card-pic" className="card-pic" />
+                                                    <img height="200" width="100%" src={post.picture[0]} alt="card-pic" className="card-pic" />
                                                 )}
                                                 {post.video && (
                                                     <iframe

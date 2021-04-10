@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import axios from "axios";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn, MDBCard, MDBCardBody, MDBModalFooter } from 'mdbreact';
+import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn, MDBCard, MDBCardBody} from 'mdbreact';
 import LeftNavAdmin from "../../components/LeftNavAdmin";
 import { NavLink } from "react-router-dom";
-import ListAdmin from "./ListAdmin";
 import { useSelector } from "react-redux";
 
 
@@ -60,7 +59,7 @@ const Ajout_admin = () => {
   return (
     <>
      <div >
-            <nav style={{ backgroundColor: 'green' }}>
+            <nav style={{ backgroundColor: 'green',  position: 'fixed', zIndex:'100'}}>
             <NavLink exact to="/gestion">
                 <h3 style={{ color: 'white', fontFamily: 'fantasy', marginLeft: '20px', paddingTop: '20px' }}>AtypikHouse@Dashboard</h3>
             </NavLink>
@@ -70,7 +69,7 @@ const Ajout_admin = () => {
                 <div className="col-3">
                     <LeftNavAdmin />
                 </div>
-                <div className="col-9">
+                <div className="col-9" style={{paddingTop: '100px'}}>
                     {formSubmit ? (
                         <>
                         <h4 className="success" style={{textAlign:'center', paddingTop:'15%'}}>

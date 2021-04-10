@@ -9,7 +9,7 @@ const Gestion_pubs = () => {
     const userData = useSelector((state) => state.userReducer);
     return (
         <div>
-            <nav style={{ backgroundColor: 'green' }}>
+            <nav style={{ backgroundColor: 'green',  position: 'fixed', zIndex:'100' }}>
             <NavLink exact to="/gestion">
                 <h3 style={{ color: 'white', fontFamily: 'fantasy', marginLeft: '20px', paddingTop: '20px' }}>AtypikHouse@Dashboard</h3>
             </NavLink>
@@ -19,7 +19,7 @@ const Gestion_pubs = () => {
                 <div className="col-3">
                     <LeftNavAdmin />
                 </div>
-                <div className="col-9">
+                <div className="col-9" style={{paddingTop: '100px'}}>
                     <br/>
                     <h1>Gestion des publications</h1>
                     <div className="container">

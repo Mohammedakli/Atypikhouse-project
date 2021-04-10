@@ -2,6 +2,7 @@ import {
   DELETE_COMMENT,
   DELETE_POST,
   EDIT_COMMENT,
+  EDIT_RESERVATION,
   GET_POSTS,
   LIKE_POST,
   UNLIKE_POST,
@@ -75,6 +76,26 @@ export default function postReducer(state = initialState, action) {
           };
         } else return post;
       });
+
+      case EDIT_RESERVATION:
+        return state.map((post) => {
+          if (post._id === action.payload.postId) {
+            return {
+              ...post,
+              reservations: post.reservations.map((reservation) => {
+                if (reservation._id === action.payload.reservationId) {
+                  return {
+                    ...reservation,
+                    paiement: action.payload.paiement,
+                  };
+                } else {
+                  return reservation;
+                }
+              }),
+            };
+          } else return post;
+        });
+    
 
     case DELETE_COMMENT:
       return state.map((post) => {

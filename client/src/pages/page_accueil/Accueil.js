@@ -6,6 +6,8 @@ import NavBar from '../../components/PageAccueil/NavBar';
 import { InfoData } from '../../data/InfoData';
 import { SliderData } from '../../data/SliderData';
 import GlobalStyle from './globalStyles';
+import LeftNav from '../../components/LeftNav';
+import Footer from '../../components/PageAccueil/Footer';
 
 export const Accueil = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -20,7 +22,9 @@ export const Accueil = () => {
         <NavBar toggle={toggle}/>
         <Dropdown isOpen={isOpen} toggle={toggle}/>
         <Hero slides={SliderData}/>
+        <LeftNav/>
         <InfoSection {...InfoData}/>
+        <Footer />
       </>
     )
 }

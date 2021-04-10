@@ -1,5 +1,8 @@
 const UserModel = require("../models/user_model");
 const ObjectID = require("mongoose").Types.ObjectId;
+const stripe = require("stripe")("sk_test_51IQafJDRHvU06AUoyvDxQUsVuvq58MJCDXzx5VZw4OqtkHCpAuXaOR9TJzwdCf56bEeuLqTGsUd5CX7MQvLJfo9w00QPnJOnbT");
+//const { uuid } = require('uuid');
+const { v4: uuidv4 } = require('uuid');
 
 // Liste de tous les utlisateurs
 module.exports.getAllUsers = async (req, res) => {
@@ -29,7 +32,7 @@ module.exports.updateUser = async (req, res) => {
       {
         $set: {
           role: req.body.role,
-          pseudo: req.params.pseudo,
+          pseudo: req.body.pseudo,
         },
       },
       { new: true, upsert: true, setDefaultsOnInsert: true },
@@ -55,3 +58,31 @@ module.exports.deleteUser = async (req, res) => {
     return res.status(500).json({ message: err });
   }
 };
+
+module.exports.paymentReservation = (req, res) => {
+  const {post, token} = req.body;
+    console.log("post", post);
+    console.log("prix", post.prix);
+    const idempontencyKey = uuidv4();
+
+    return stripe.customers.create({
+        email: token.email,
+        source: token.id
+    }).then(customer => {
+        stripe.charges.create(post._id, {
+            amount: post.prix * 100,
+            currency: 'eur',
+            customer: customer.id,
+            receipt_email: token.email,
+            description: `Valeur du post.titre`,
+            shipping: {
+                name: token.card.name,
+                address: {
+                    country: token.card.adress_country
+                }
+            }
+        }, {idempontencyKey})
+    })
+    .then(result => res.status(200).json(result))
+    .catch(err => console.log(err))
+}

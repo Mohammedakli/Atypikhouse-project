@@ -6,33 +6,37 @@ import ImageFour from '../images/house-4.jpg'
 export const SliderData = [
     {
         title: 'Cabane Atypik dans les Alpes, France',
-        price: '500,00€',
+        price: '100,00€',
+        time: 'Jour',
         path: '/home',
-        label: 'View Home',
+        label: 'Accueil',
         image: ImageOne,
         alt: 'House'
     },
     {
         title: 'Cabane Atypik  dans le sud, France',
-        price: '480,00€',
+        price: '120,00€',
+        time: 'Jour',
         path: '/home',
-        label: 'View Home',
+        label: 'Accueil',
         image: ImageTwo,
         alt: 'House'
     },
     {
         title: 'Cabane Atypik dans les Yvelines, France',
-        price: '600,00€',
+        price: '200,00€',
+        time: 'Week-end',
         path: '/home',
-        label: 'View Home',
+        label: 'Accueil',
         image: ImageThree,
         alt: 'House'
     },
     {
         title: 'Cabane Atypik près de Paris, France',
-        price: '800,00€',
+        price: '500,00€',
+        time: 'Semaine',
         path: '/home',
-        label: 'View Home',
+        label: 'Accueil',
         image: ImageFour,
         alt: 'House'
     }

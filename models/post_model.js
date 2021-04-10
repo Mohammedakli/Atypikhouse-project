@@ -26,10 +26,16 @@ const post_schema = new mongoose.Schema(
     superficie: {
       type: Number
     },
-    localisation: {
+    departement: {
       type: String,
       trim: true,
-      maxlength: 50,
+      maxlength: 100,
+    },
+    lng: {
+      type: Number
+    },
+    lat: {
+      type: Number
     },
     type :  {
       type: String,
@@ -53,6 +59,19 @@ const post_schema = new mongoose.Schema(
     date_close: {
       type: Date,
     },
+    reservations: {
+      type : [
+        {
+          reservationId: String,
+          personPseudo : String,
+          paiement: Number,
+          date_open: Date,
+          date_close: Date,
+          timestamp: Number,
+        }
+      ],
+      required: true,
+    },
     comments: {
       type: [
         {
@@ -63,6 +82,17 @@ const post_schema = new mongoose.Schema(
         }
       ],
       required: true,
+    },
+    prises: {
+      type: [
+        {
+          priseId:String,
+          prisePseudo: String,
+          prisePicture: String,
+          text: String,
+          timestamp: Number,
+        }
+      ],
     },
   },
   {
