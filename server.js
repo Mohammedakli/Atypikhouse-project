@@ -44,9 +44,15 @@ app.get('/jwtid', requireAuth, (req, res) => {
 });
 
 
+//heroku
+if(process.env.NODE_ENV === 'production') {
+
+}
+
+
 
 
 // SERVER
-app.listen(process.env.PORT, () => {
+app.listen(process.env.PORT || 3001, () => {
   console.log(`Ecoute sur le port ${process.env.PORT}`);
 })

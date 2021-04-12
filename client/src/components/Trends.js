@@ -31,7 +31,7 @@ const Trends = () => {
         <ul>
           {trendList.length &&
             trendList.map((post) => {
-              return (<MDBCard style={{backgroundColor: '#f5f6fa', border:'1px solid #f39200', borderRadius: "10px"}}>
+              return (<MDBCard style={{backgroundColor: '#f5f6fa', borderRadius: "10px"}}>
                 <li key={post._id}>
                   <div>
                     {(post.picture[0] !== "") && <img height="200" width='100%' style={{ borderRadius: "10px", paddingBottom: '5px' }} src={post.picture[0]} alt="post-pic" />}

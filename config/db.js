@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 mongoose
   .connect(
-    `mongodb+srv://${process.env.DB_USER_PASS}@cluster0.kz7ea.mongodb.net/atypikhouse`,
+   process.env.MONGODB_URI || `mongodb+srv://${process.env.DB_USER_PASS}@cluster0.kz7ea.mongodb.net/atypikhouse`,
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,
