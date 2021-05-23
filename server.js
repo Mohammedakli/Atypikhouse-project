@@ -26,6 +26,12 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(cookieParser());
 
+app.get('/', (req, res) => {
+  res.send({
+      message: 'Hello, world!'
+  });
+});
+
 // Routes d'accès aux utilisateurs et aux posts
 app.use('/api/user', userRoutes);
 app.use('/api/post', postRoutes);
@@ -56,3 +62,5 @@ if(process.env.NODE_ENV === 'production') {
 app.listen(process.env.PORT || 3001, () => {
   console.log(`Ecoute sur le port ${process.env.PORT}`);
 })
+
+module.exports = app;

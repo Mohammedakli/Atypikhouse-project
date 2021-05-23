@@ -14,9 +14,9 @@ module.exports.getAllUsers = async (req, res) => {
 module.exports.userInfo = (req, res) => {
   if (!ObjectID.isValid(req.params.id))
     return res.status(400).send("ID unknown : " + req.params.id);
-
+  
   UserModel.findById(req.params.id, (err, docs) => {
-    if (!err) res.send(docs);
+    if (!err) res.status(200).send(docs);
     else console.log("ID unknown : " + err);
   }).select("-password");
 };

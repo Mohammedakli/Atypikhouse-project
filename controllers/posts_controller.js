@@ -77,7 +77,7 @@ module.exports.sendJustificatif = async (req, res) => {
 //Lecture des Posts (publications)
 module.exports.readPost = (req, res) => {
   PostModel.find((err, docs) => {
-    if (!err) res.send(docs);
+    if (!err) res.status(200).send({data : docs});
     else console.log("Error to get data : " + err);
   }).sort({ createdAt: -1 });
 };
@@ -105,29 +105,29 @@ PostModel.find({'_id' : { $in: postIds}})
 module.exports.createPost = async (req, res) => {
   let fileName;
  
-  if (req.file !== null) {
-    try {
-      if (
-        req.file.detectedMimeType != "image/jpg" &&
-        req.file.detectedMimeType != "image/png" &&
-        req.file.detectedMimeType != "image/jpeg"
-      )
-        throw Error("invalid file");
+  // if (req.file !== null) {
+  //   try {
+  //     if (
+  //       req.file.detectedMimeType != "image/jpg" &&
+  //       req.file.detectedMimeType != "image/png" &&
+  //       req.file.detectedMimeType != "image/jpeg"
+  //     )
+  //       throw Error("invalid file");
 
-      if (req.file.size > 500000) throw Error("max size");
-    } catch (err) {
-      const errors = uploadErrors(err);
-      return res.status(201).json({ errors });
-    }
-    fileName = req.body.posterId + Date.now() + ".jpg";
+  //     if (req.file.size > 500000) throw Error("max size");
+  //   } catch (err) {
+  //     const errors = uploadErrors(err);
+  //     return res.status(404).json({ message : "image error" });
+  //   }
+  //   fileName = req.body.posterId + Date.now() + ".jpg";
 
-    await pipeline(
-      req.file.stream,
-      fs.createWriteStream(
-        `${__dirname}/../client/public/uploads/posts/${fileName}`
-      )
-    );
-  }
+  //   await pipeline(
+  //     req.file.stream,
+  //     fs.createWriteStream(
+  //       `${__dirname}/../client/public/uploads/posts/${fileName}`
+  //     )
+  //   );
+  // }
 
   const newPost = new postModel({
     posterId: req.body.posterId,
@@ -142,11 +142,11 @@ module.exports.createPost = async (req, res) => {
     status: req.body.status,
     clientId : req.body.clientId,
     nbr_personne: req.body.nbr_personne,
-    picture: req.file !== null ? "./uploads/posts/" + fileName : "",
-    video: req.body.video,
+    // picture: req.file !== null ? "./uploads/posts/" + fileName : "",
+    // video: req.body.video,
     likers: [],
-    date_open: req.body.date_open,
-    date_close: req.body.date_close,
+    // date_open: req.body.date_open,
+    // date_close: req.body.date_close,
     comments: [],
   });
 
@@ -154,7 +154,7 @@ module.exports.createPost = async (req, res) => {
     const post = await newPost.save();
     return res.status(201).json(post);
   } catch (err) {
-    return res.status(400).send(err);
+    return res.status(400).json({message : err});
   }
 };
 
@@ -189,6 +189,7 @@ module.exports.updatePost = (req, res) => {
 module.exports.deletePost = (req, res) => {
   if (!ObjectID.isValid(req.params.id))
     return res.status(400).send("ID unknown : " + req.params.id);
+    console.log(res.params)
 
   PostModel.findByIdAndRemove(req.params.id, (err, docs) => {
     if (!err) res.send(docs);

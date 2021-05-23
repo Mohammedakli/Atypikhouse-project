@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
 
-mongoose
+  mongoose
   .connect(
-   process.env.MONGODB_URI || `mongodb+srv://${process.env.DB_USER_PASS}@cluster0.kz7ea.mongodb.net/atypikhouse`,
+   process.env.MONGODB_URI || `mongodb+srv://${process.env.DB_USER_PASS}.mongodb.net/atypikhouse`,
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,
@@ -12,3 +12,6 @@ mongoose
   )
   .then(() => console.log("MongoDB connecté"))
   .catch((err) => console.log("Erreur de connexion à MongoDB", err));
+
+
+

@@ -17,7 +17,7 @@ module.exports.signUp = async (req, res) => {
 
   try {
     const user = await UserModel.create({pseudo, email, tel, password, role});
-    res.status(201).json({ user: user._id});
+    res.status(201).json({ user: user._id, message: 'User created!'});
 
     let transport = nodemailer.createTransport({
       service: 'gmail',
@@ -63,11 +63,11 @@ module.exports.signIn = async (req, res) => {
       } else {
         const token = creation_token(user._id);
         res.cookie('jwt', token, { httpOnly: true, temps_de_token});
-        res.status(200).json({ user: user._id})
+        res.status(200).json({ user: user._id, token : token})
       } 
     } catch (err){
       const errors = signInErrors(err);
-      res.status(200).json({ errors });
+      res.status(404).json({ errors });
     }
 }
 
@@ -86,7 +86,7 @@ module.exports.signInPro = async (req, res) => {
       } 
     } catch (err){
       const errors = signInErrors(err);
-      res.status(200).json({ errors });
+      res.status(404).json({ errors });
     }
 }
 
