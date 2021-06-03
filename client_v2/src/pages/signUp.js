@@ -5,8 +5,32 @@ import "../styles/signUp.css"
 import SignUpPic from "../img/signUp.jpg"
 import NavBar from "../components/navBar"
 import Footer from "../components/footer";
+import axios from 'axios';
+import {useHistory} from "react-router-dom";
 
 export default function Register() {
+    const history = useHistory();
+    const [name ,setName]= useState("")
+    const [email ,setEmail]= useState("")
+    const [tel ,setTel]= useState("")
+    const [role ,setRole]= useState("")
+    const [password ,setPassword]= useState("")
+    const register = (e) => {
+        e.preventDefault();
+        axios.post("http://localhost:5001/api/user/register",{
+            pseudo : name,
+            email : email,
+            tel : tel,
+            password : password,
+            role : role
+        }).then((res)=>{
+            if(res){
+                history.push("/Welcome")
+            }
+        })
+        .catch(err=>{console.log(err)})
+    }
+    
 
 return(
     <div>
@@ -33,17 +57,25 @@ return(
                                 <form>
                                     <div class="form-group">
                                         <label for="yourName">Nom</label>
-                                        <input type="text" class="form-control" id="yourName" />
+                                        <input type="text" onChange={(e) => setName(e.target.value)} value={name} class="form-control" id="yourName" />
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Adresse mail</label>
-                                        <input type="email" class="form-control" id="exampleInputEmail1" />
+                                        <input type="email" onChange={(e) => setEmail(e.target.value)} value={email} class="form-control" id="exampleInputEmail1" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputTel1">Telephone</label>
+                                        <input type="tel" onChange={(e) => setTel(e.target.value)} value={tel} class="form-control" id="exampleInputTel1" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputRole1">Role</label>
+                                        <input type="text" onChange={(e) => setRole(e.target.value)} value={role} class="form-control" id="exampleInputRole1" />
                                     </div>
                                     <div class="form-group mb-5">
                                         <label for="exampleInputPassword1">Mot de passe</label>
-                                        <input type="password" class="form-control" id="exampleInputPassword1" />
+                                        <input type="password" onChange={(e) => setPassword(e.target.value)} value={password} class="form-control" id="exampleInputPassword1" />
                                     </div>
-                                    <button type="submit" class="btn btn-theme">S'inscrire</button>
+                                    <button onClick={register} type="submit" class="btn btn-theme">S'inscrire</button>
                                 </form>
                             </div>
                         </div>

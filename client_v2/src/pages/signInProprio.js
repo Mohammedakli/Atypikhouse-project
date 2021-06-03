@@ -5,7 +5,8 @@ import "../styles/signIn.css";
 import SignInPic from "../img/signIn.webp"
 import NavBar from "../components/navBar"
 import Footer from "../components/footer"
-
+import {useHistory} from "react-router-dom";
+import axios from 'axios';
 
 
 export default function LoginProprio() {
@@ -19,6 +20,24 @@ export default function LoginProprio() {
 //   function handleSubmit(event) {
 //     event.preventDefault();
 //   }
+    const [email, setEmail] = useState("");
+    const [password , setPassword] = useState("");
+    const history = useHistory();
+
+    const  handleSubmit= (e) =>{
+        e.preventDefault();
+        axios.post("http://localhost:5001/api/user/loginpro",{
+            email: email,
+            password: password})
+        .then((res)=>{
+            if(res){
+                history.push("/Welcome")
+            }
+        })
+        .catch(function(error){
+            console.log(error)
+        })
+    }
 
   return (
       <div>
@@ -47,14 +66,14 @@ export default function LoginProprio() {
                                 <form>
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Adresse mail</label>
-                                        <input type="email" class="form-control" id="exampleInputEmail1"/>
+                                        <input onChange={(e) => setEmail(e.target.value)} value={email} type="email" class="form-control" id="exampleInputEmail1"/>
                                     </div>
                                     <div class="form-group mb-5">
                                         <label for="exampleInputPassword1">Mot de passe</label>
-                                        <input type="password" class="form-control" id="exampleInputPassword1"/>
+                                        <input onChange={(e) => setPassword(e.target.value)} value={password} type="password" class="form-control" id="exampleInputPassword1"/>
                                     </div>
                                     <div>
-                                        <button type="submit" class="btn btn-theme" >Se connecter</button>
+                                        <button  onClick={handleSubmit} type="submit" class="btn btn-theme" >Se connecter</button>
                                         <a href="#l" class="forgot-link float-right text-primary">Forgot password?</a>
                                     </div>                                    
                                 </form>

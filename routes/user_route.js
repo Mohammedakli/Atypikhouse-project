@@ -5,10 +5,11 @@ const uploadController = require('../controllers/img_pro_up_controller');
 const multer = require("multer");
 const upload = multer();
 
+const { addUserValidation } =require('../Validation/users/user.validation');
 
 router.post("/loginpro", authController.signInPro);
 router.post("/loginadmin", authController.signInAdmin);
-router.post("/register", authController.signUp);
+router.post("/register",addUserValidation, authController.signUp);
 router.post("/login", authController.signIn);
 router.get("/logout", authController.logout);
 router.get("/", userController.getAllUsers);

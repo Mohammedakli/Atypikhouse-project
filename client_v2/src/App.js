@@ -8,6 +8,7 @@ import home from './pages/home'
 import signInProprio from './pages/signInProprio'
 import signUpProprio from './pages/signUpProprio'
 import signInAdmin from './pages/signInAdmin'
+import Welcome from './pages/Welcome'
 function App() {
   return (
     <div className="App">
@@ -20,6 +21,7 @@ function App() {
         <Route path="/signUpProprio" component={signUpProprio} />
         <Route path="/signInProprio" component={signInProprio} />
         <Route path="/signInAdmin" component={signInAdmin} />
+        <Route path="/Welcome" component={Welcome}/>
         {/* <Route path="/contact" component={Contact} />  */}
       </main>
     </Router>
