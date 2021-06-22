@@ -12,7 +12,8 @@ export default function Explore (){
     const [post, setPosts]= useState([]);
   useEffect( async () => {
     await axios.get("http://localhost:5001/api/post/").then(res=>{
-      setPosts(res.data)})
+      setPosts(res.data)
+    })
       .catch(err=>console.log(err));
 }, []); 
    console.log(post)

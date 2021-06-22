@@ -31,11 +31,11 @@ export default function LoginProprio() {
             password: password})
         .then((res)=>{
             if(res){
-                history.push("/Welcome")
+                history.push("/createPostForm")
             }
         })
         .catch(function(error){
-            console.log(error)
+            alert(error.message)
         })
     }
 

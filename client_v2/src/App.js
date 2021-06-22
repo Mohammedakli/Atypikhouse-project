@@ -11,7 +11,6 @@ import signInAdmin from './pages/signInAdmin'
 import explore from './pages/explore'
 import reservation from './pages/reservation'
 import postForm from './pages/createPostForm'
-import Welcome from './pages/Welcome'
 import StripeContainer from './pages/StripeContainer';
 import axios from 'axios'
 function App() {
@@ -23,7 +22,6 @@ function App() {
         <Route path="/" exact component={home} />
         <Route path="/signUp" component={signUp} />
         <Route path="/signIn" component={signIn} />
-        <Route path="/Welcome" component={Welcome}/>
         <Route path="/signUpProprio" component={signUpProprio} />
         <Route path="/signInProprio" component={signInProprio} />
         <Route path="/signInAdmin" component={signInAdmin} />

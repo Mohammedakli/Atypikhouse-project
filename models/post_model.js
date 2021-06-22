@@ -15,7 +15,7 @@ const post_schema = new mongoose.Schema(
       maxlength: 500,
     },
     picture: {
-      type : String,
+      type :String,
     },
     video: {
       type: String,
