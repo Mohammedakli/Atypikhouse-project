@@ -4,7 +4,7 @@ const post_schema = new mongoose.Schema(
   {
     posterId: {
       type: String,
-      required: true
+      // required: true
     },
     titre: {
       type:String
@@ -15,7 +15,7 @@ const post_schema = new mongoose.Schema(
       maxlength: 500,
     },
     picture: {
-      type: [String],
+      type : String,
     },
     video: {
       type: String,
@@ -81,7 +81,7 @@ const post_schema = new mongoose.Schema(
           timestamp: Number,
         }
       ],
-      required: true,
+      // required: true,
     },
     prises: {
       type: [
@@ -96,7 +96,7 @@ const post_schema = new mongoose.Schema(
     },
   },
   {
-    timestamps: true,
+    // timestamps: true,
   }
 );
 

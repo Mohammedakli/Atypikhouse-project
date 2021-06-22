@@ -32,7 +32,7 @@ export default function Login() {
             password: password})
         .then((res)=>{
             if(res){
-                history.push("/Welcome")
+                history.push("/explore")
             }
         })
         .catch((err)=>{alert(err.message)})
@@ -46,7 +46,7 @@ export default function Login() {
           <br></br>
           <br></br>
           <br></br>
-    <div id="main-wrapper" class="container">
+    <div id="main-wrapper" class="container bg-1">
     <div class="row justify-content-center">
         <div class="col-xl-10">
             <div class="card border-0">

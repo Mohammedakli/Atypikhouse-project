@@ -17,7 +17,6 @@ router.get("/:id", userController.userInfo);
 router.put("/:id", userController.updateUser);
 router.delete("/:id", userController.deleteUser);
 router.post("/upload", upload.single("file"), uploadController.uploadProfil);
-
 router.post("/payment", userController.paymentReservation);
 
 module.exports = router;

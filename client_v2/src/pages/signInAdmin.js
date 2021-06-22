@@ -48,7 +48,7 @@ const [email, setEmail] = useState("");
           <br></br>
           <br></br>
           <br></br>
-    <div id="main-wrapper" class="container">
+    <div id="main-wrapper" class="container bg-1">
     <div class="row justify-content-center">
         <div class="col-xl-10">
             <div class="card border-0">

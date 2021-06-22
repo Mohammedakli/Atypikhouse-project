@@ -2,6 +2,11 @@ body{
     margin-top:20px;
     background: #f6f9fc;
 }
+
+.bg-1{
+    box-shadow: 1px 1px 10px rgb(143, 134, 134);
+    border-radius: 20px;
+}
 .account-block {
     padding: 0;
     background-image: url(https://bootdey.com/img/Content/bg1.jpg);

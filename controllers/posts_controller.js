@@ -1,6 +1,7 @@
 const PostModel = require("../models/post_model");
 const postModel = require("../models/post_model");
 const UserModel = require("../models/user_model");
+
 const { uploadErrors } = require("../utilitaires/errors_utils");
 const ObjectID = require("mongoose").Types.ObjectId;
 const fs = require("fs");
@@ -8,6 +9,7 @@ const { promisify } = require("util");
 const pipeline = promisify(require("stream").pipeline);
 const nodemailer = require("nodemailer");
 require('dotenv').config({path: './config/.env'});
+const stripe = require("stripe")(process.env.STRIPE_SECRET_TEST)
 
 //mail
 module.exports.sendMailTo = async (req, res) => {
@@ -76,8 +78,8 @@ module.exports.sendJustificatif = async (req, res) => {
 
 //Lecture des Posts (publications)
 module.exports.readPost = (req, res) => {
-  PostModel.find((err, docs) => {
-    if (!err) res.status(200).send({data : docs});
+  PostModel.find({},(err, docs) => {
+    if (!err) res.status(200).send(docs);
     else console.log("Error to get data : " + err);
   }).sort({ createdAt: -1 });
 };
@@ -88,22 +90,17 @@ module.exports.readOnePost = (req, res) => {
   let type = req.query.type
   let postIds = req.query.id
 
-  if (type === "array ") {
-
-  }
-
 // Post correspondant à chaque un id (posterId)
-PostModel.find({'_id' : { $in: postIds}})
-  .populate('writer')
-  .exex((err, post) => {
-    if(err) return req.status(400).send(err)
-    return res.status(200).send(post)
-  })
+PostModel.findById(req.params.id).
+      then(result=>res.status(200).send(result))
+      .catch(err=>res.status(500).send(err)); 
 };
 
 //Nouveau POST
 module.exports.createPost = async (req, res) => {
-  let fileName;
+  
+  // const {file,
+  // body:{name}} = req;
  
   // if (req.file !== null) {
   //   try {
@@ -128,7 +125,17 @@ module.exports.createPost = async (req, res) => {
   //     )
   //   );
   // }
-
+  // if(typeof(req.file)==='undefined' || typeof(req.body)==='undefined' ||typeof(fileName)==='undefined'){
+  //   return res.status(400).json({
+  //     errors: "problem with sending data"
+  //   })
+  // }
+  //  const fileName = name + Math.floor(Math.random * 1000) + file.detectedFileExtension;
+  // await pipeline(
+  //   file.stream,
+  //   fs.createWriteStream(`${__dirname}/../uploads/postImages/${fileName}`)
+  // );
+  
   const newPost = new postModel({
     posterId: req.body.posterId,
     message: req.body.message,
@@ -142,14 +149,14 @@ module.exports.createPost = async (req, res) => {
     status: req.body.status,
     clientId : req.body.clientId,
     nbr_personne: req.body.nbr_personne,
-    // picture: req.file !== null ? "./uploads/posts/" + fileName : "",
+    picture: req.body.picture,
     // video: req.body.video,
     likers: [],
     // date_open: req.body.date_open,
     // date_close: req.body.date_close,
     comments: [],
   });
-
+ 
   try {
     const post = await newPost.save();
     return res.status(201).json(post);
@@ -259,6 +266,31 @@ module.exports.makeReservation = (req, res) => {
 };
 
 //PAIEMENT
+module.exports.Payment = async(req,res)=>{
+  let{amount , id}= req.body;
+  try{
+        const payment = await stripe.paymentIntents.create({
+          amount,
+          currency : "USD",
+          description : "test company",
+          payment_method : id,
+          confirm : true
+        })
+        console.log("payment", payment)
+        res.json({
+          message: "payment success",
+          success: true
+        })
+  }catch(error){
+    console.log("error", error)
+        res.json({
+          message: "payment failed",
+          seccess: false
+        })
+
+  }
+
+};
 module.exports.editReservation = (req, res) => {
   if (!ObjectID.isValid(req.params.id))
     return res.status(400).send("ID unknown : " + req.params.id);
